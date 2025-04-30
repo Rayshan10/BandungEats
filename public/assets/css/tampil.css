@@ -1,0 +1,37 @@
+    .recipe-card {
+        transition: transform 0.2s;
+    }
+    
+    .recipe-card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .recipe-details {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+    }
+    
+    .recipe-description, .recipe-ingredients, .recipe-steps {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .recipe-description:last-child, .recipe-ingredients:last-child, .recipe-steps:last-child {
+        border-bottom: none;
+    }
+    
+    h4 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .btn-primary {
+        background-color: #4CAF50;
+        border-color: #4CAF50;
+    }
+    
+    .btn-primary:hover {
+        background-color: #45a049;
+        border-color: #45a049;
+    }

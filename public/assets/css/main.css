@@ -640,6 +640,45 @@ section,
     color: var(--accent-color);
 }
 
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd; /* Opsional: border untuk estetika */
+}
+
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.profile-dropdown:hover .dropdown-menu,
+.profile-dropdown.active .dropdown-menu {
+    display: block;
+}
+
+.profile-dropdown .dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profile-dropdown .dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
 /*--------------------------------------------------------------
 # Home Section
 --------------------------------------------------------------*/
@@ -722,6 +761,23 @@ section,
         font-size: 14px;
     }
 }
+
+.icon {
+    width: 100%; /* Pastikan div icon memenuhi container */
+    height: 180px; /* Sesuaikan tinggi sesuai kebutuhan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hindari gambar keluar dari area */
+    border-radius: 8px; /* Tambahkan sedikit border-radius agar tampilan lebih smooth */
+}
+
+.icon img {
+    width: 100%; /* Gambar akan memenuhi lebar container */
+    height: 100%; /* Gambar akan memenuhi tinggi container */
+    object-fit: cover; /* Pastikan gambar tetap proporsional */
+}
+
 
 .home .icon-boxes {
     padding-bottom: 60px;
@@ -825,9 +881,20 @@ section,
     margin-left: 10px;
 }
 
-.about .about-images img {
+.about-images img {
+    width: 100%;
+    object-fit: cover;
     border-radius: 10px;
 }
+
+.large-img {
+    height: 100%;
+}
+
+.small-img {
+    height: 180px; /* Sesuaikan tinggi gambar agar sejajar */
+}
+
 
 /*--------------------------------------------------------------
 # Resep Section
@@ -891,6 +958,7 @@ section,
     margin-bottom: 0;
 }
 
+/* Hover effects for larger screens */
 @media (min-width: 1365px) {
     .resep .resep-item:hover {
         transform: translateY(-10px);
@@ -901,6 +969,8 @@ section,
         color: var(--accent-color);
     }
 }
+
+
 
 /*--------------------------------------------------------------
 # Faq Section
@@ -1028,51 +1098,6 @@ section,
 .contact .info-item:hover i {
     background: var(--accent-color);
     color: var(--contrast-color);
-}
-
-.contact .php-email-form {
-    height: 100%;
-}
-
-.contact .php-email-form input[type="text"],
-.contact .php-email-form input[type="email"],
-.contact .php-email-form textarea {
-    font-size: 14px;
-    padding: 10px 15px;
-    box-shadow: none;
-    border-radius: 0;
-    color: var(--default-color);
-    background-color: color-mix(
-        in srgb,
-        var(--background-color),
-        transparent 50%
-    );
-    border-color: color-mix(in srgb, var(--default-color), transparent 80%);
-}
-
-.contact .php-email-form input[type="text"]:focus,
-.contact .php-email-form input[type="email"]:focus,
-.contact .php-email-form textarea:focus {
-    border-color: var(--accent-color);
-}
-
-.contact .php-email-form input[type="text"]::placeholder,
-.contact .php-email-form input[type="email"]::placeholder,
-.contact .php-email-form textarea::placeholder {
-    color: color-mix(in srgb, var(--default-color), transparent 70%);
-}
-
-.contact .php-email-form button[type="submit"] {
-    color: var(--contrast-color);
-    background: var(--accent-color);
-    border: 0;
-    padding: 10px 30px;
-    transition: 0.4s;
-    border-radius: 50px;
-}
-
-.contact .php-email-form button[type="submit"]:hover {
-    background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
 /*--------------------------------------------------------------
