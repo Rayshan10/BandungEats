@@ -1,15 +1,34 @@
-<section id="hero" class="home section light-background">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-5">
-            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center hero-content">
-                <h2>Jelajahi cita rasa masakan khas kota Bandung</h2>
-                <p>Menyajikan resep-resep pilihan yang mudah diikuti. Ayo temukan resep asli autentik khas kota Bandung</p>
-                <div class="d-flex">
-                    <a href="#resep" class="btn-get-started">Get Started</a>
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <span class="hero-badge">
+                    🍽️ Bandung Culinary
+                </span>
+                <h1 class="hero-title">
+                    Jelajahi cita rasa
+                    <span>masakan khas Bandung</span>
+                </h1>
+                <p class="hero-description">
+                    Temukan berbagai resep khas Bandung lengkap dengan
+                    langkah memasak, bahan, dan rekomendasi resep terbaik.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#resep" class="btn btn-primary">
+                        Mulai Menjelajah
+                    </a>
+                    <a href="#popular" class="btn btn-outline-primary">
+                        Resep Populer
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-image">
-                <img src="assets/img/depann.png" class="img-fluid offset-2" alt="">
+
+            <div class="col-lg-6 text-center">
+                <img
+                    src="{{ asset('assets/img/depann.png') }}"
+                    class="hero-image"
+                    alt="Bandung Eats">
             </div>
         </div>
     </div>

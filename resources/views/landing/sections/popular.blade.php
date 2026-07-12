@@ -1,23 +1,61 @@
-<section>
-    <div class="container section-title popular-title" data-aos="fade-up">
-        <div><span>Resep</span> <span class="description-title">Populer</span></div>
-    </div>
-    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
-        <div class="container position-relative">
-            <div class="row gy-4 mt-5">
-                @foreach($rekomendasiResep as $resep)
-                <div class="col-xl-3 col-md-6">
-                    <div class="icon-box">
-                        <div class="icon">
-                            <img src="{{ asset('storage/' . $resep->gambar) }}" alt="{{ $resep->judul }}" class="img-fluid full-width-img">
+<section id="popular" class="popular-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-badge">
+                🔥 Resep Pilihan
+            </span>
+            <h2>
+                Resep Populer
+            </h2>
+            <p>
+                Resep favorit yang paling banyak dilihat oleh pengguna BandungEats.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            @foreach($rekomendasiResep as $resep)
+            <div class="col-lg-3 col-md-6">
+                <div class="recipe-card">
+                    <img
+                        src="{{ asset('storage/'.$resep->gambar) }}"
+                        alt="{{ $resep->judul }}"
+                        class="recipe-image">
+                    <div class="recipe-body">
+                        <h3 class="recipe-title">
+                            {{ $resep->judul }}
+                        </h3>
+
+                        <span class="recipe-category">
+                            {{ ucfirst($resep->kategori) }}
+                        </span>
+
+                        <div class="recipe-info">
+
+                            <span>
+                                <i class="bi bi-clock"></i>
+                                {{ $resep->waktu }}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-people"></i>
+                                {{ $resep->porsi }}
+                            </span>
+
                         </div>
-                        <h4 class="title">
-                            <a href="{{ route('resep.show', $resep->id) }}" class="stretched-link">{{ $resep->judul }}</a>
-                        </h4>
+
+                        <div class="recipe-level">
+                            <i class="bi bi-bar-chart"></i>
+                            {{ $resep->kesulitan }}
+                        </div>
+                        <a
+                            href="{{ route('resep.show',$resep->id) }}"
+                            class="btn btn-primary btn-sm">
+                            Lihat Resep
+                        </a>
                     </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
         </div>
     </div>
 </section>

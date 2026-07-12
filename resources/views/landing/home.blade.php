@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Beranda')
+@section('title','Beranda')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}">
 @endpush
 
 @section('content')
@@ -22,8 +22,8 @@
 
 @include('landing.sections.contact')
 
-@push('scripts')
-    <script src="{{ asset('assets/js/landing.js') }}"></script>
-@endpush
-
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/js/landing.js') }}"></script>
+@endpush

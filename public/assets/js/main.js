@@ -120,41 +120,60 @@
 
   const profileDropdown = document.querySelector('.profile-dropdown');
 
-profileDropdown.addEventListener('click', () => {
-    profileDropdown.classList.toggle('active');
-});
+  if (profileDropdown) {
 
-document.addEventListener('click', (event) => {
-    if (!profileDropdown.contains(event.target)) {
-        profileDropdown.classList.remove('active');
-    }
-});
-// Toggle Bookmark
-document.getElementById('bookmark-btn').addEventListener('click', function () {
-  let icon = document.getElementById('bookmark-icon');
-  if (icon.classList.contains('fa-regular')) {
-      icon.classList.remove('fa-regular');
-      icon.classList.add('fa-solid', 'text-yellow-500');
-  } else {
-      icon.classList.remove('fa-solid', 'text-yellow-500');
-      icon.classList.add('fa-regular');
+      profileDropdown.addEventListener('click', () => {
+          profileDropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (event) => {
+          if (!profileDropdown.contains(event.target)) {
+              profileDropdown.classList.remove('active');
+          }
+      });
+
   }
-});
+
+// Toggle Bookmark
+const bookmarkBtn = document.getElementById('bookmark-btn');
+
+if (bookmarkBtn) {
+
+    bookmarkBtn.addEventListener('click', function () {
+
+        let icon = document.getElementById('bookmark-icon');
+
+        if(icon.classList.contains('fa-regular')){
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid','text-yellow-500');
+        }else{
+            icon.classList.remove('fa-solid','text-yellow-500');
+            icon.classList.add('fa-regular');
+        }
+
+    });
+
+}
 
 // Share Button Functionality
-document.getElementById('share-btn').addEventListener('click', async function () {
-  if (navigator.share) {
-      try {
-          await navigator.share({
-              title: document.title,
-              url: window.location.href
-          });
-          alert('Link berhasil dibagikan!');
+const shareBtn = document.getElementById('share-btn');
+
+if (shareBtn) {
+    shareBtn.addEventListener('click', async function () {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                });
+                alert('Link berhasil dibagikan!');
       } catch (err) {
           console.error('Error saat berbagi:', err);
       }
   } else {
       alert('Fitur berbagi tidak didukung di browser ini.');
   }
-});
+    });
+}
+
 })();

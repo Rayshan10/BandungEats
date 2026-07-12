@@ -26,7 +26,7 @@ Route::get('/rekomendasi', [ResepController::class, 'rekomendasi'])->name('resep
 
 // Authentication Routes
 Route::get('/login', function () {
-    return view('login');
+    return view('auth.login');
 })->name('login');
 
 Route::get('/register', [RegisterController::class, 'show'])->name('register');

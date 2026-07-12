@@ -10,7 +10,7 @@
 
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#resep">Resep</a></li>
                 <li><a href="#faq">FAQ</a></li>
@@ -18,7 +18,7 @@
             
                 @guest
                     <!-- Jika user belum login -->
-                    <li><a href="{{ route('login') }}" class="active">Login</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 @endguest
             
                 @auth

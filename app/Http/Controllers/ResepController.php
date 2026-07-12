@@ -164,6 +164,6 @@ class ResepController extends Controller
         public function home()
     {
         $rekomendasiResep = Resep::latest()->take(4)->get();
-        return view('home', compact('rekomendasiResep'));
+        return view('landing.home', compact('rekomendasiResep'));
     }
 }
