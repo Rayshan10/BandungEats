@@ -1,15 +1,21 @@
-<!-- Resep Section -->
-<section id="resep" class="resep section">
-
-    <!-- Resep Title -->
-    <div style="margin-top: -50px; margin-bottom: -50px;" class="container section-title" data-aos="fade-up">
-        <div><span>Ayo Cari</span> <span class="description-title">Resepnya</span></div>
-        <div class="resep">
-            <div class="search-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search for recipes..." />
-            </div>
-            <!-- Tambahkan div untuk hasil pencarian -->
-            <div id="searchResults" class="mt-3"></div>
+<section id="resep" class="home-search-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">
+                🔎 Cari Resep
+            </span>
+            <h2>
+                Temukan Resep Favoritmu
+            </h2>
+            <p>
+                Cari resep khas Bandung berdasarkan nama makanan atau kategori.
+            </p>
         </div>
-    </div>
-</section><!-- /Resep Section -->
+        <div class="search-wrapper">
+            <i class="bi bi-search"></i>
+            <input type="text" id="searchInput" placeholder="Cari resep khas Bandung..." >
+            <button class="search-btn">
+                Cari
+            </button>
+        </div>
+        <div id="searchResults"></div>

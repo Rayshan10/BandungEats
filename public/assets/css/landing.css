@@ -2,62 +2,62 @@
 Hero
 ====================================================*/
 
-.hero-section{
-    padding:20px 0 40px;
-    min-height:calc(100vh - 80px);
-    display:flex;
-    align-items:center;
-    background:#f8fcfa;
+.hero-section {
+    padding: 20px 0 40px;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    background: #f8fcfa;
 }
 
-.hero-badge{
-    display:inline-block;
-    background:#dff7e6;
-    color:#198754;
-    padding:8px 16px;
-    border-radius:30px;
-    font-weight:600;
-    margin-bottom:20px;
+.hero-badge {
+    display: inline-block;
+    background: #dff7e6;
+    color: #198754;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.hero-title{
-    font-size:58px;
-    font-weight:800;
-    line-height:1.15;
-    margin-top:-10px;
-    margin-bottom:20px;
+.hero-title {
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-top: -10px;
+    margin-bottom: 20px;
 }
 
-.hero-title span{
-    color:#00BFFF;
+.hero-title span {
+    color: #00bfff;
 }
 
-.hero-description{
-    font-size:18px;
-    color:#666;
-    margin-bottom:35px;
+.hero-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 35px;
 }
 
-.hero-buttons{
-    display:flex;
-    gap:15px;
+.hero-buttons {
+    display: flex;
+    gap: 15px;
 }
 
-.hero-image{
-    width:100%;
-    max-width:520px;
-    animation:float 4s ease-in-out infinite;
+.hero-image {
+    width: 100%;
+    max-width: 520px;
+    animation: float 4s ease-in-out infinite;
 }
 
-@keyframes float{
-    0%{
-        transform:translateY(0px);
+@keyframes float {
+    0% {
+        transform: translateY(0px);
     }
-    50%{
-        transform:translateY(-15px);
+    50% {
+        transform: translateY(-15px);
     }
-    100%{
-        transform:translateY(0px);
+    100% {
+        transform: translateY(0px);
     }
 }
 
@@ -65,251 +65,319 @@ Hero
 POPULAR
 ====================================================*/
 
-.popular-section{
-    padding:50px 0;
-    background:#ffffff;
+.popular-section {
+    padding: 50px 0;
+    background: #ffffff;
 }
 
-.section-header{
-    margin-bottom:30px;
+.section-header {
+    margin-bottom: 30px;
 }
 
-.section-badge{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:30px;
-    background:#fff2d8;
-    color:#f59e0b;
-    font-weight:600;
-    margin-bottom:18px;
+.section-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: #fff2d8;
+    color: #f59e0b;
+    font-weight: 600;
+    margin-bottom: 18px;
 }
 
-.section-header h2{
-    font-size:42px;
-    font-weight:700;
-    margin-bottom:15px;
+.section-header h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
-.section-header p{
-    color:#777;
-    font-size:18px;
+.section-header p {
+    color: #777;
+    font-size: 18px;
 }
 
-.recipe-card{
-    display:flex;
-    flex-direction:column;
-    border-radius:20px;
-    overflow:hidden;
-    background:white;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    transition:.35s;
-    height:100%;
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: 0.35s;
+    height: 100%;
 }
 
-.recipe-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 20px 45px rgba(0,0,0,.15);
+.recipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
 }
 
-.recipe-image{
-    width:100%;
-    height:240px;
-    object-fit:cover;
+.recipe-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
 }
 
-.recipe-body{
-    padding:22px;
+.recipe-body {
+    padding: 22px;
 }
 
-.recipe-body h5{
-    font-weight:700;
-    margin-bottom:18px;
-    min-height:55px;
+.recipe-body h5 {
+    font-weight: 700;
+    margin-bottom: 18px;
+    min-height: 55px;
 }
 
-.recipe-body .btn{
-    width:100%;
-    border-radius:12px;
+.recipe-body .btn {
+    width: 100%;
+    border-radius: 12px;
 }
 
-.recipe-body .btn{
-    background:#00BFFF;
-    border:none;
+.recipe-body .btn {
+    background: #00bfff;
+    border: none;
 }
 
-.recipe-body .btn:hover{
-    background:#009ACD;
+.recipe-body .btn:hover {
+    background: #009acd;
 }
 
-.recipe-category{
-    display:inline-block;
-    padding:6px 14px;
-    border-radius:20px;
-    background:#E8F5E9;
-    color:#00BFFF;
-    font-size:13px;
-    font-weight:600;
-    margin-bottom:18px;
+.recipe-category {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #e8f5e9;
+    color: #00bfff;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 18px;
 }
 
-.recipe-title{
-    font-size:30px;
-    font-weight:700;
-    margin-bottom:8px;
+.recipe-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
-.recipe-info{
-    display:flex;
-    gap:15px;
-    margin-bottom:8px;
-    color:#555;
+.recipe-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 8px;
+    color: #555;
 }
 
-.recipe-level{
-    margin-bottom:28px;
-    color:#444;
+.recipe-level {
+    margin-bottom: 28px;
+    color: #444;
 }
 
-/* =====================================================
-    CONTACT
-===================================================== */
+/* ==========================================
+    ABOUT
+========================================== */
 
-.home-contact-title{
-    margin-top:-40px;
+.about {
+    padding: 50px 0;
+}
+
+.about-badge {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.about-title {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.about-title span {
+    color: #00bfff;
+}
+
+.about-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.9;
+    margin-bottom: 35px;
+}
+
+.about-feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+.about-feature i {
+    color: #00bfff;
+    font-size: 22px;
+}
+
+.about-gallery {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.about-main {
+    flex: 2;
+}
+
+.about-main img {
+    width: 100%;
+    height: 560px;
+    object-fit: cover;
+    border-radius: 28px;
+}
+
+.about-main-image {
+    width: 65%;
+    border-radius: 25px;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.about-main-image:hover {
+    transform: scale(1.03);
+}
+
+.about-small-images {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-small-images img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.about-small-images img:hover {
+    transform: scale(1.05);
+}
+
+.about-images {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.about-main-image img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.about-side {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+}
+
+.about-side img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 22px;
+}
+
+.about-side-images {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-side-images img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.about-images img {
+    transition: 0.4s;
+}
+
+.about-images img:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 /* =====================================================
     CATEGORIES
 ===================================================== */
-
-.home-category-title{
-    margin-left: -950px;
-    margin-bottom: -60px;
+.home-search-section {
+    padding: 50px 0;
+    background: #ffffff;
 }
 
-.home-category-card{
-    position: relative;
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 18px;
-    overflow: hidden;
-    transition: .3s;
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
 }
 
-.home-category-card:hover{
-    transform: translateY(-8px);
+.section-badge {
+    display: inline-block;
+    background: #eefaf0;
+    color: #1f7a4d;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.home-category-link{
-    position:absolute;
-    bottom:15px;
-    left:15px;
-    text-decoration:none;
+.section-header h2 {
+    font-size: 48px;
+    font-weight: 800;
 }
 
-.home-category-name{
-    margin:0;
-    font-size:40px;
-    font-weight:700;
-    color:#00BFFF;
-    text-shadow:2px 2px 10px rgba(0,0,0,.6);
+.section-header p {
+    color: #6b7280;
+    font-size: 18px;
 }
 
-.home-category-pedas{
-    background-image:url("../img/pedas.jpg");
-}
-
-.home-category-gurih{
-    background-image:url("../img/gurih.jpg");
-}
-
-.home-category-manis{
-    background-image:url("../img/manis.jpg");
-}
-
-.home-category-jajanan{
-    background-image:url("../img/jajanan.jpg");
-}
-
-.home-category-minuman{
-    background-image:url("../img/minuman.jpg");
-}
-
-.home-category-favorit{
-    background-image:url("../img/favorit.jpg");
-}
-
-/* Kontainer hasil pencarian */
-#searchResults {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-/* Kartu hasil pencarian */
-.search-card {
+.search-wrapper {
+    max-width: 800px;
+    margin: auto;
     display: flex;
     align-items: center;
+    background: white;
+    border-radius: 60px;
     padding: 12px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* Gambar pada hasil pencarian */
-.search-card img {
-    width: 130px;  /* Perbesar ukuran gambar */
-    height: 130px;
-    object-fit: cover;
-    border-radius: 8px;
+.search-wrapper i {
+    font-size: 22px;
+    margin: 0 15px;
+    color: #00bfff;
 }
 
-/* Kontainer informasi */
-.search-card-body {
-    padding: 8px;
-    font-size: 14px;
-    flex-grow: 1;
+.search-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 18px;
 }
 
-/* Judul resep */
-.search-card-title {
-    font-size: 18px; /* Perbesar judul */
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* Kategori, diletakkan di bawah judul */
-.search-category {
-    font-size: 12px;
-    background-color: #007bff;
+.search-btn {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 40px;
+    background: #00bfff;
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 5px;
-}
-
-/* Waktu, kesulitan, dan porsi sejajar */
-.search-details-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px; /* Beri jarak antar elemen */
-}
-
-/* Elemen waktu, kesulitan, porsi */
-.search-detail-box {
-    padding: 5px 8px;
-    font-size: 12px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    min-width: 60px;
-}
-
-/* Tombol Lihat lebih kecil */
-.btn-sm {
-    font-size: 12px;
-    padding: 4px 8px;
-    margin-top: 5px;
+    font-weight: 600;
 }

@@ -1,33 +1,54 @@
 <section id="about" class="about section">
     <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-                <p class="who-we-are">Tentang Kami</p>
-                <h3>Hadir Untuk Melestarikan Resep Asli Masakan Khas Kota Bandung</h3>
-                <p class="fst-italic">
-                    Selamat datang di BandungEats, surga bagi pecinta kuliner yang ingin merasakan cita rasa autentik khas Kota Bandung! Kami hadir untuk memperkenalkan kelezatan masakan tradisional Bandung yang kaya akan rempah dan sejarah. Dari kehangatan semangkuk seblak yang menggugah selera hingga manisnya pisang molen yang legendaris, BandungEats mengajak Anda menyelami setiap hidangan dengan cerita dan budaya yang melekat di dalamnya. Di sini, kami tidak hanya berbagi resep, tetapi juga membawa Anda dalam perjalanan mengenal kearifan lokal yang terkandung di balik setiap masakan khas Bandung.
+        <div class="row align-items-center">
+            {{-- KIRI --}}
+            <div class="col-lg-6">
+                <span class="about-badge">
+                    🌿 Tentang BandungEats
+                </span>
+                <h2 class="about-title mt-3">
+                    Melestarikan Kuliner
+                    <span>Khas Kota Bandung</span>
+                </h2>
+                <p class="about-description">
+                    BandungEats hadir sebagai platform yang membantu masyarakat
+                    mengenal, mempelajari, dan melestarikan berbagai resep khas
+                    Kota Bandung. Kami percaya bahwa kuliner merupakan bagian
+                    penting dari budaya yang harus terus diwariskan kepada
+                    generasi berikutnya.
                 </p>
-                <a href="#contact" class="read-more"><span>More Info</span><i class="bi bi-arrow-right"></i></a>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Resep Terverifikasi</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Bahan Mudah Ditemukan</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Langkah Mudah Dipahami</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Kuliner Asli Bandung</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
-                <div class="row gy-4">
-                    <!-- Gambar Besar -->
-                    <div class="col-lg-6">
-                        <img src="assets/img/gedungsate.jpg" class="img-fluid large-img" alt="">
-                    </div>
-            
-                    <!-- Dua Gambar Kecil di Sebelah Kanan -->
-                    <div class="col-lg-6">
-                        <div class="row gy-4 d-flex flex-column">
-                            <div class="col-lg-12">
-                                <img src="assets/img/savoy.jpg" class="img-fluid small-img" alt="">
-                            </div>
-                            <div class="col-lg-12">
-                                <img src="assets/img/pasopati2.jpg" class="img-fluid small-img" alt="">
-                            </div>
-                        </div>
-                    </div>
+            {{-- KANAN --}}
+            <div class="col-lg-6">
+                <div class="about-gallery">
+                    <img src="{{ asset('assets/img/gedungsate.jpg') }}" class="about-main-image">
+
+<div class="about-small-images">
+
+    <img src="{{ asset('assets/img/savoy.jpg') }}">
+
+    <img src="{{ asset('assets/img/pasopati2.jpg') }}">
+
+</div>
                 </div>
             </div>
         </div>
