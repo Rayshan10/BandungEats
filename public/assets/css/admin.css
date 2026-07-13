@@ -83,3 +83,84 @@ body{
 .admin-content{
     padding:40px;
 }
+
+.chart-card{
+    height:420px;
+}
+
+.chart-card canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+.dashboard-card{
+    border:none;
+    border-radius:20px;
+    padding:20px;
+    transition:.3s;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+}
+
+.dashboard-card:hover .dashboard-icon{
+    transform:rotate(-8deg) scale(1.08);
+}
+
+.dashboard-card small{
+    color:#888;
+}
+
+.dashboard-card h2{
+    font-weight:700;
+    margin:0;
+}
+
+.dashboard-header h2{
+    font-size:34px;
+    font-weight:700;
+}
+
+.dashboard-header span{
+    color:#00BFFF;
+}
+
+.dashboard-header p{
+    color:#777;
+}
+
+.dashboard-card .card-body{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.dashboard-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:28px;
+    transition:.3s;
+}
+
+.bg-primary{
+    background:#00BFFF !important;
+}
+
+.bg-success{
+    background:#20c997 !important;
+}
+
+.bg-warning{
+    background:#ffc107 !important;
+}
+
+.bg-danger{
+    background:#ff5c7a !important;
+}
