@@ -9,6 +9,7 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResepController;
+use App\Http\Controllers\DashboardController;
 
 // Routes yang bisa diakses semua orang (tanpa login)
 Route::get('/', function () {
@@ -66,4 +67,11 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['check.role:admin'])->group(function () {
         Route::resource('recipes', ResepController::class)->except(['index', 'show']);
     });
+});
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class,'index'])
+        ->name('dashboard');
+
 });

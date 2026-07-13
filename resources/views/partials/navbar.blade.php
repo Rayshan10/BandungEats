@@ -30,7 +30,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="/profile" class="dropdown-item">Edit Akun</a></li>
                         @if(auth()->check() && auth()->user()->role === 'admin')
-                        <li><a href="/resep" class="dropdown-item">Kelola Resep</a></li>
+                        <li><a href="{{ route('dashboard') }}" class="dropdown-item">Kelola Resep</a></li>
                         @endif
                         <li>
                             <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
