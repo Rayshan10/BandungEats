@@ -1,38 +1,53 @@
-<!-- Contact Section -->
-<section id="contact" class="contact section">
-
-    <!-- Section Title -->
-    <div class="container section-title contact-title" data-aos="fade-up"> 
-        <div><span>Butuh Bantuan?</span> <span class="description-title">Hubungi Kami!</span></div>
-    </div><!-- End Section Title -->
-
-    <div class="container" data-aos="fade" data-aos-delay="100">
-        <div class="row gy-4">
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="section-heading text-center">
+            <span class="section-badge">
+                📩 Contact
+            </span>
+            <h2>
+                Hubungi <span>Kami</span>
+            </h2>
+            <p>
+                Punya pertanyaan, kritik, atau ingin berbagi resep khas Bandung?
+                Kami akan dengan senang hati mendengarnya.
+            </p>
+        </div>
+        <div class="row g-4 mt-5">
             <div class="col-lg-4">
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <i class="bi bi-geo-alt flex-shrink-0"></i>
-                    <div>
-                        <h3>Address</h3>
-                        <p>JL. Cijambe No. 2 Kel. PasirEndah Kec. Ujungberung, Bandung, Jawa Barat </p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
                     </div>
-                </div><!-- End Info Item -->
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-telephone flex-shrink-0"></i>
-                    <div>
-                        <h3>Call Us</h3>
-                        <p>+62 822 1547 9606</p>
+                    <h4>Alamat</h4>
+                    <p>
+                        Jl. Cijambe No.2<br>
+                        Ujung Berung<br>
+                        Bandung
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone-fill"></i>
                     </div>
-                </div><!-- End Info Item -->
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-envelope flex-shrink-0"></i>
-                    <div>
-                        <h3>Email Us</h3>
-                        <p>bandungeats@gmail.com</p>
+                    <h4>Telepon</h4>
+                    <p>
+                        +62 822 1547 9606
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope-fill"></i>
                     </div>
-                </div><!-- End Info Item -->
+                    <h4>Email</h4>
+                    <p>
+                        bandungeats@gmail.com
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</section><!-- /Contact Section -->
+</section>

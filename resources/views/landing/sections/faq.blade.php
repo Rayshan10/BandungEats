@@ -1,62 +1,70 @@
-<!-- Faq Section -->
-<section id="faq" class="faq section light-background">
+<section id="faq" class="faq-section">
     <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="content px-xl-5">
-                <h3><span>Frequently Asked </span><strong style="color: #00BFFF">Questions</strong></h3>
-                </div>
+        <div class="section-heading text-center">
+            <span class="section-badge">
+                ❓ FAQ
+            </span>
+            <h2>
+                Pertanyaan <span>Umum</span>
+            </h2>
+            <p>
+                Temukan jawaban atas pertanyaan yang paling sering diajukan mengenai BandungEats.
+            </p>
+        </div>
+        <div class="faq-card">
+            <button class="faq-question">
+                <span>
+                    Apa itu BandungEats?
+                </span>
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="faq-answer">
+                BandungEats merupakan platform yang menyediakan resep khas Kota Bandung lengkap dengan langkah memasak, informasi bahan, serta rekomendasi resep terbaik.
             </div>
-
-            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <h3><span class="num">1.</span> <span>Apa itu BandungEats?</span></h3>
-                        <div class="faq-content">
-                            <p>BandungEats adalah sebuah website yang menyajikan berbagai resep masakan khas Bandung. Kami bertujuan untuk memperkenalkan cita rasa unik kuliner Bandung kepada seluruh pecinta masakan, baik di dalam maupun di luar kota Bandung.
-                            </p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-                    
-                    <div class="faq-item">
-                        <h3><span class="num">2.</span> <span>Apa saja jenis resep yang tersedia di BandungEats?</span></h3>
-                        <div class="faq-content">
-                            <p>Kami menyediakan berbagai resep masakan khas Bandung, seperti:<br>
-                                - Makanan utama (contoh: Nasi Timbel, Lotek, Karedok)<br>
-                                - Camilan khas (contoh: Cireng, Combro, Surabi)<br>
-                                - Minuman khas (contoh: Bandrek, Bajigur, Es Goyobod)<br>
-                                - Dessert tradisional (contoh: Colenak, Es Cendol, Es Doger)
-                            </p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3><span class="num">3.</span> <span> Apakah resep di BandungEats mudah diikuti?</span></h3>
-                        <div class="faq-content">
-                            <p>Ya, semua resep di BandungEats dilengkapi dengan langkah-langkah yang mudah diikuti, daftar bahan yang jelas, serta tips tambahan agar hasil masakan maksimal.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3><span class="num">4.</span> <span>Apakah BandungEats menyediakan resep untuk pemula?</span></h3>
-                        <div class="faq-content">
-                            <p>Tentu! Kami memiliki kategori khusus untuk pemula, dengan resep-resep sederhana yang bisa dicoba oleh siapa saja, bahkan tanpa pengalaman memasak sekalipun.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-
-                    <div class="faq-item">
-                        <h3><span class="num">5.</span> <span>Bagaimana jika saya memiliki pertanyaan atau masalah terkait resep?</span></h3>
-                        <div class="faq-content">
-                            <p>Jika Anda memiliki pertanyaan atau masalah, Anda dapat menghubungi kami melalui halaman "Contact" di website BandungEats. Kami akan dengan senang hati membantu Anda.</p>
-                        </div>
-                        <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
-                </div>
+        </div>
+        <div class="faq-card">
+            <button class="faq-question">
+                <span>
+                    Bagaimana cara mencari resep di BandungEats?
+                </span>
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="faq-answer">
+                Anda dapat menggunakan fitur pencarian di halaman utama untuk mencari resep berdasarkan nama makanan atau kategori.
+            </div>
+        </div>
+        <div class="faq-card">
+            <button class="faq-question">
+                <span>
+                    Apakah resep di BandungEats dapat diakses secara gratis?
+                </span>
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="faq-answer">
+                Ya, semua resep yang tersedia di BandungEats dapat diakses secara gratis oleh pengguna.
+            </div>
+        </div>
+        <div class="faq-card">
+            <button class="faq-question">
+                <span>
+                    Bagaimana cara menambahkan resep ke dalam kategori favorit di BandungEats?
+                </span>
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="faq-answer">
+                Untuk menambahkan resep ke kategori favorit, Anda perlu mendaftar dan masuk ke akun BandungEats. Setelah itu, Anda dapat menandai resep yang ingin Anda simpan sebagai favorit melalui halaman profil Anda.
+            </div>
+        </div>
+        <div class="faq-card">
+            <button class="faq-question">
+                <span>
+                    Bagaimana cara menghubungi tim BandungEats?
+                </span>
+                <i class="bi bi-plus-lg"></i>
+            </button>
+            <div class="faq-answer">
+                Anda dapat menghubungi tim BandungEats melalui halaman kontak yang tersedia di situs ini.
             </div>
         </div>
     </div>
-</section><!-- /Faq Section -->
+</section>

@@ -41,14 +41,10 @@
             <div class="col-lg-6">
                 <div class="about-gallery">
                     <img src="{{ asset('assets/img/gedungsate.jpg') }}" class="about-main-image">
-
-<div class="about-small-images">
-
-    <img src="{{ asset('assets/img/savoy.jpg') }}">
-
-    <img src="{{ asset('assets/img/pasopati2.jpg') }}">
-
-</div>
+                    <div class="about-small-images">
+                        <img src="{{ asset('assets/img/savoy.jpg') }}">
+                        <img src="{{ asset('assets/img/pasopati2.jpg') }}">
+                    </div>
                 </div>
             </div>
         </div>

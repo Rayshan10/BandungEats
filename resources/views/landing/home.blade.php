@@ -16,8 +16,6 @@
 
 @include('landing.sections.search')
 
-@include('landing.sections.categories')
-
 @include('landing.sections.faq')
 
 @include('landing.sections.contact')

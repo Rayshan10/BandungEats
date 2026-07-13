@@ -22,38 +22,42 @@ document.addEventListener('DOMContentLoaded', function() {
                             
                             data.forEach(item => {
                                 const card = `
-                                <div class="col-md-6 mb-2">
-                                    <div class="search-card p-2">
-                                        <div class="row g-0 align-items-center">
-                                            <!-- Gambar lebih besar -->
-                                            <div class="col-4">
-                                                ${item.gambar ? 
-                                                    `<img src="/storage/${item.gambar}" 
-                                                        class="img-fluid rounded"
-                                                        alt="${item.judul}">` 
-                                                    : ''}
+                                <div class="col-12 mb-4">
+                                    <div class="search-result-card">
+                                        <img
+                                            src="/storage/${item.gambar}"
+                                            class="search-result-image"
+                                            alt="${item.judul}">
+                                        <div class="search-result-content">
+                                            <h4>${item.judul}</h4>
+                                            <span class="search-category-badge">
+                                                ${item.kategori}
+                                            </span>
+                                            <div class="search-meta">
+                                                <span>
+                                                    <i class="bi bi-clock"></i>
+                                                    ${item.waktu}
+                                                </span>
+                                                <span>
+                                                    <i class="bi bi-people"></i>
+                                                    ${item.porsi}
+                                                </span>
+                                                <span>
+                                                    <i class="bi bi-bar-chart"></i>
+                                                    ${item.kesulitan}
+                                                </span>
                                             </div>
-                                            <div class="col-8">
-                                                <div class="search-card-body">
-                                                    <!-- Judul diperbesar -->
-                                                    <h1 class="search-card-title">${item.judul}</h1>
-                                                    <!-- Kategori di bawah judul -->
-                                                    <div class="search-category">${item.kategori}</div>
-                                                    <!-- Waktu, kesulitan, dan porsi sejajar di bawah kategori -->
-                                                    <div class="search-details-container">
-                                                        <div class="search-detail-box">${item.waktu}</div>
-                                                        <div class="search-detail-box">${item.kesulitan}</div>
-                                                        <div class="search-detail-box">${item.porsi}</div>
-                                                    </div>
-                                                    <a href="/resep/${item.id}" class="btn btn-info btn-sm">
-                                                        <i class="fas fa-eye"></i> Lihat
-                                                    </a>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="/resep/${item.id}"
+                                                class="btn btn-outline-primary rounded-pill">
+                                                Lihat Resep
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            `;
+                                `;
                                     resultsContainer.innerHTML += card;
                                 });
                                 
@@ -80,3 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         });
     });
+
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const card = question.parentElement;
+        card.classList.toggle('active');
+    });
+});
