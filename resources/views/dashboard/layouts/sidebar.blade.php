@@ -7,21 +7,21 @@
 
     <ul class="sidebar-menu">
         <li>
-            <a href="#">
+            <a href="/dashboard">
                 <i class="bi bi-grid-fill"></i>
                 Dashboard
             </a>
         </li>
 
         <li>
-            <a href="/resep">
-                <i class="bi bi-journal-richtext"></i>
-                Kelola Resep
+            <a href="{{ route('dashboard.resep') }}">
+                <i class="bi bi-journal-bookmark-fill"></i>
+                <span>Kelola Resep</span>
             </a>
         </li>
 
         <li>
-            <a href="/users">
+            <a href="{{ route('users.index') }}">
                 <i class="bi bi-people-fill"></i>
                 Kelola User
             </a>

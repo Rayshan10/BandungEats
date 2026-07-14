@@ -14,7 +14,7 @@ class RegisterController extends Controller
      */
     public function show()
     {
-        return view('register'); // Pastikan file resources/views/register.blade.php ada
+        return view('auth.register'); // Pastikan file resources/views/register.blade.php ada
     }
 
     /**

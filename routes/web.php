@@ -64,8 +64,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
 
     // Routes khusus admin
-    Route::middleware(['check.role:admin'])->group(function () {
+    Route::middleware(['auth','check.role:admin'])->group(function () {
         Route::resource('recipes', ResepController::class)->except(['index', 'show']);
+        Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+
+        Route::get('/dashboard/resep', [DashboardController::class,'resep'])
+            ->name('dashboard.resep');
     });
 });
 

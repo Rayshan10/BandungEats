@@ -31,4 +31,11 @@ class DashboardController extends Controller
             'kategori'
         ));
     }
+
+    public function resep()
+    {
+        $resep = Resep::latest()->get();
+
+        return view('dashboard.resep.tampil', compact('resep'));
+    }
 }
