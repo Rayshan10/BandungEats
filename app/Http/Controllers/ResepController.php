@@ -37,7 +37,7 @@ class ResepController extends Controller
      */
     public function tambah()
     {
-        return view('resep.tambah');
+        return view('dashboard.resep.tambah');
     }
 
     /**
@@ -46,34 +46,64 @@ class ResepController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+
             'category' => 'required|string|max:255',
+
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
             'description' => 'required|string',
-            'video' => 'nullable|url',
+
+            'video' => [
+                'nullable',
+                'regex:/^(https?\:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/).+$/'
+            ],
+
             'time' => 'required|string|max:255',
+
             'difficulty' => 'required|string|max:255',
+
             'servings' => 'required|string|max:255',
+
             'ingredients' => 'required|string',
-            'steps' => 'required|string'
+
+            'steps' => 'required|string',
+
+        ],[
+
+            'video.regex' => 'Link harus berasal dari YouTube.'
+
         ]);
 
-        $imagePath = $request->hasFile('image') ? $request->file('image')->store('resep-images', 'public') : null;
+        $resep = new Resep();
 
-        Resep::create([
-            'kategori' => $validated['category'],
-            'judul' => $validated['title'],
-            'gambar' => $imagePath,
-            'deskripsi' => $validated['description'],
-            'link' => $validated['video'],
-            'waktu' => $validated['time'],
-            'kesulitan' => $validated['difficulty'],
-            'porsi' => $validated['servings'],
-            'bahan' => $validated['ingredients'],
-            'langkah' => $validated['steps']
-        ]);
+        // Mapping Frontend → Database
+        $resep->kategori   = $validated['category'];
+        $resep->judul      = $validated['title'];
+        $resep->deskripsi  = $validated['description'];
+        $resep->link       = $validated['video'];
+        $resep->waktu      = $validated['time'];
+        $resep->kesulitan  = $validated['difficulty'];
+        $resep->porsi      = $validated['servings'];
+        $resep->bahan      = $validated['ingredients'];
+        $resep->langkah    = $validated['steps'];
 
-        return redirect()->route('resep.tampil')->with('success', 'Resep berhasil ditambahkan!');
+        if($request->hasFile('image')){
+
+            $path = $request
+                ->file('image')
+                ->store('resep','public');
+
+            $resep->gambar = $path;
+
+        }
+
+        $resep->save();
+
+        return redirect()
+                ->route('dashboard.resep')
+                ->with('success','Resep berhasil ditambahkan.');
     }
 
     /**
@@ -94,7 +124,7 @@ class ResepController extends Controller
             'category' => 'required|string',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'video' => 'nullable|url',
+            'video' => 'nullable|regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
             'difficulty' => 'required|string',
             'servings' => 'required|string',
             'time' => 'required|string',
@@ -165,5 +195,20 @@ class ResepController extends Controller
     {
         $rekomendasiResep = Resep::latest()->take(4)->get();
         return view('landing.home', compact('rekomendasiResep'));
+    }
+
+    protected function getYoutubeIdFromUrl(?string $link)
+    {
+        if (!$link) {
+            return null;
+        }
+
+        preg_match(
+            '/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/',
+            $link,
+            $matches
+        );
+
+        return $matches[1] ?? null;
     }
 }

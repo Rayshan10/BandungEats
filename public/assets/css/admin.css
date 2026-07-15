@@ -255,3 +255,39 @@ INVENTORY
 .inventory-table tbody tr:hover{
     background:#F9FCFF;
 }
+
+.upload-area{
+    border:2px dashed #0ea5e9;
+    border-radius:20px;
+    min-height:240px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+    background:#f8fbff;
+}
+
+.upload-area:hover{
+    background:#eef8ff;
+    transform:scale(1.01);
+}
+
+.upload-area.dragover{
+    border-color:#2563eb;
+    background:#dbeafe;
+}
+
+#previewImage{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+#fileName{
+    font-size:14px;
+    color:#666;
+}
+
