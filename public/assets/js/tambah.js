@@ -250,3 +250,67 @@ if (success) {
     });
 
 }
+
+// =====================================
+// Preview Resep
+// =====================================
+
+const previewBtn = document.getElementById("previewRecipe");
+
+if(previewBtn){
+
+    previewBtn.addEventListener("click",()=>{
+
+        document.getElementById("previewTitle").innerText =
+            document.querySelector("[name='title']").value;
+
+        document.getElementById("previewCategory").innerText =
+            document.querySelector("[name='category']").value;
+
+        document.getElementById("previewTime").innerText =
+            "⏱ "+document.querySelector("[name='time']").value;
+
+        document.getElementById("previewDifficulty").innerText =
+            "⭐ "+document.querySelector("[name='difficulty']").value;
+
+        document.getElementById("previewServings").innerText =
+            "🍽 "+document.querySelector("[name='servings']").value;
+
+        document.getElementById("previewDescription").innerText =
+            document.querySelector("[name='description']").value;
+
+        document.getElementById("previewIngredients").innerText =
+            document.querySelector("[name='ingredients']").value;
+
+        document.getElementById("previewSteps").innerText =
+            document.querySelector("[name='steps']").value;
+
+        // Preview Foto
+        if(imagePreview.src){
+
+            document.getElementById("previewImage").src =
+                imagePreview.src;
+
+            document.getElementById("previewImage")
+                .classList.remove("d-none");
+
+        }
+
+        // Preview Thumbnail YouTube
+        if(youtubePreview.src){
+
+            document.getElementById("previewYoutube").src =
+                youtubePreview.src;
+
+            document.getElementById("previewYoutube")
+                .classList.remove("d-none");
+
+        }
+
+        new bootstrap.Modal(
+            document.getElementById("previewModal")
+        ).show();
+
+    });
+
+}

@@ -280,7 +280,10 @@
                 </div>
 
                 <div class="d-flex justify-content-end gap-2 mt-4">
-                    <button type="button" class="btn btn-outline-primary">
+                    <button
+                        type="button"
+                        id="previewRecipe"
+                        class="btn btn-outline-primary">
                         <i class="bi bi-eye"></i>
                         Preview
                     </button>
@@ -295,6 +298,55 @@
     </form>
 </div>
 @endsection
+
+<div class="modal fade"
+    id="previewModal"
+    tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Preview Resep
+                </h5>
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <img id="previewImage" class="img-fluid rounded mb-4 d-none">
+                <h3 id="previewTitle"></h3>
+                <div class="mb-3">
+                    <span id="previewCategory" class="badge bg-primary"></span>
+                    <span id="previewTime" class="ms-2"></span>
+                    <span id="previewDifficulty" class="ms-2"></span>
+                    <span id="previewServings" class="ms-2"></span>
+                </div>
+
+                <hr>
+
+                <h5>Deskripsi</h5>
+                <p id="previewDescription"></p>
+
+                <hr>
+
+                <h5>Bahan</h5>
+                <pre id="previewIngredients"></pre>
+
+                <hr>
+
+                <h5>Langkah</h5>
+                <pre id="previewSteps"></pre>
+
+                <hr>
+
+                <h5>Video Tutorial</h5>
+                <img id="previewYoutube" class="img-fluid rounded d-none">
+            </div>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
