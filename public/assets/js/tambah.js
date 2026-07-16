@@ -1,132 +1,198 @@
+// =====================================
+// Element
+// =====================================
+
 const uploadArea = document.getElementById("uploadArea");
-    const defaultUpload= uploadArea.innerHTML;
-    const imageInput = document.getElementById("image");
-    const imagePreview = document.getElementById("imagePreview");
-    const previewContainer = document.getElementById("previewContainer");
-    const removeImage = document.getElementById("removeImage");
-    const changeImage = document.getElementById("changeImage");
+const imageInput = document.getElementById("image");
+const imagePreview = document.getElementById("imagePreview");
+const previewContainer = document.getElementById("previewContainer");
 
-    // Klik upload
-    uploadArea.addEventListener("click", () => {
-        imageInput.click();
-    });
+const changeImage = document.getElementById("changeImage");
+const removeImage = document.getElementById("removeImage");
 
-    changeImage.onclick=()=>{
-            imageInput.click();
-        }
+const uploadTitle = document.getElementById("uploadTitle");
+const uploadSubtitle = document.getElementById("uploadSubtitle");
 
-    removeImage.onclick = () => {
-        imageInput.value = "";
-        imagePreview.src = "";
-        previewContainer.classList.add("d-none");
-        uploadArea.classList.remove("d-none");
-    };
+const videoInput = document.getElementById("video");
+const youtubePreview = document.getElementById("youtubePreview");
 
-    // Fungsi preview
-    function previewImage(file){
+// =====================================
+// Preview Image
+// =====================================
 
-        if(!file.type.startsWith("image/")){
-            Swal.fire({
-                icon:'error',
-                title:'File tidak valid',
-                text:'Silakan upload file gambar.'
-            });
-            return;
-        }
+function previewImage(file) {
 
-        const reader = new FileReader();
+    if (!file) {
 
-        reader.onload = function(e){
+        return;
 
-            imagePreview.src = e.target.result;
-            previewContainer.classList.remove("d-none");
-            uploadArea.classList.add("d-none");
-
-        }
-
-        reader.readAsDataURL(file);
     }
 
-    // Upload manual
-    imageInput.addEventListener("change", function(){
+    if (!file.type.startsWith("image/")) {
 
-        if(this.files.length){
+        Swal.fire({
 
-            previewImage(this.files[0]);
+            icon: "error",
 
-        }
+            title: "Upload gagal",
+
+            text: "File harus berupa gambar."
+
+        });
+
+        return;
+
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        imagePreview.src = e.target.result;
+
+        previewContainer.classList.remove("d-none");
+
+        uploadArea.classList.add("d-none");
+
+    }
+
+    reader.readAsDataURL(file);
+
+}
+
+// =====================================
+// Upload Manual
+// =====================================
+
+if (uploadArea) {
+
+    uploadArea.addEventListener("click", () => {
+
+        imageInput.click();
 
     });
 
-    // =========================
-    // DRAG & DROP
-    // =========================
+}
 
-    uploadArea.addEventListener("dragover", function(e){
+imageInput.addEventListener("change", () => {
+
+    if (imageInput.files.length) {
+
+        previewImage(imageInput.files[0]);
+
+    }
+
+});
+
+// =====================================
+// Change Image
+// =====================================
+
+if (changeImage) {
+
+    changeImage.addEventListener("click", () => {
+
+        imageInput.click();
+
+    });
+
+}
+
+// =====================================
+// Remove Image
+// =====================================
+
+if (removeImage) {
+
+    removeImage.addEventListener("click", () => {
+
+        imageInput.value = "";
+
+        imagePreview.src = "";
+
+        previewContainer.classList.add("d-none");
+
+        uploadArea.classList.remove("d-none");
+
+    });
+
+}
+
+// =====================================
+// Drag & Drop
+// =====================================
+
+["dragenter", "dragover"].forEach(eventName => {
+
+    uploadArea.addEventListener(eventName, e => {
 
         e.preventDefault();
+
         e.stopPropagation();
 
         uploadArea.classList.add("drag-active");
 
-        uploadArea.innerHTML=`
+        uploadTitle.innerText = "Lepaskan gambar di sini";
 
-        <i class="bi bi-cloud-check upload-icon"></i>
-
-        <h5>Lepaskan gambar di sini</h5>
-
-        `;
+        uploadSubtitle.innerText = "";
 
     });
 
-    uploadArea.addEventListener("dragleave", function(e){
+});
+
+["dragleave", "drop"].forEach(eventName => {
+
+    uploadArea.addEventListener(eventName, e => {
 
         e.preventDefault();
+
         e.stopPropagation();
 
         uploadArea.classList.remove("drag-active");
 
-        uploadArea.innerHTML=defaultUpload;
+        uploadTitle.innerText = "Drag & Drop Foto";
+
+        uploadSubtitle.innerText = "atau klik untuk memilih gambar";
 
     });
 
-    uploadArea.addEventListener("drop", function(e){
+});
 
-        e.preventDefault();
-        e.stopPropagation();
+uploadArea.addEventListener("drop", e => {
 
-        uploadArea.classList.remove("drag-active");
+    const files = e.dataTransfer.files;
 
-        const files = e.dataTransfer.files;
+    if (files.length) {
 
-        if(files.length){
+        imageInput.files = files;
 
-            imageInput.files = files;
+        previewImage(files[0]);
 
-            previewImage(files[0]);
+    }
 
-        }
+});
 
-    });
+document.addEventListener("dragover", e => {
 
-    window.addEventListener("dragover", function(e){
+    e.preventDefault();
 
-        e.preventDefault();
+});
 
-    });
+document.addEventListener("drop", e => {
 
-    window.addEventListener("drop", function(e){
+    e.preventDefault();
 
-        e.preventDefault();
+});
 
-    });
+// =====================================
+// Youtube Preview
+// =====================================
 
-    const video = document.getElementById("video");
-    const youtubePreview = document.getElementById("youtubePreview");
+if (videoInput) {
 
-    video.addEventListener("input", function () {
+    videoInput.addEventListener("input", () => {
 
-        const url = this.value.trim();
+        const url = videoInput.value.trim();
 
         let id = "";
 
@@ -134,22 +200,24 @@ const uploadArea = document.getElementById("uploadArea");
 
             id = url.split("watch?v=")[1].split("&")[0];
 
-        } else if (url.includes("youtu.be/")) {
+        }
+
+        else if (url.includes("youtu.be/")) {
 
             id = url.split("youtu.be/")[1].split("?")[0];
 
         }
 
-        if (id !== "") {
+        if (id) {
 
             youtubePreview.src =
-                "https://img.youtube.com/vi/" +
-                id +
-                "/hqdefault.jpg";
+                `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 
             youtubePreview.classList.remove("d-none");
 
-        } else {
+        }
+
+        else {
 
             youtubePreview.classList.add("d-none");
 
@@ -157,14 +225,28 @@ const uploadArea = document.getElementById("uploadArea");
 
     });
 
-    // Check for success message
-    const successMessage = document.body.getAttribute('data-success');
-    if (successMessage) {
-        Swal.fire({
-            icon:'success',
-            title:'Berhasil',
-            text:'Resep berhasil ditambahkan.',
-            timer:2000,
-            showConfirmButton:false
-        });
-    }
+}
+
+// =====================================
+// Success Alert
+// =====================================
+
+const success = document.body.dataset.success;
+
+if (success) {
+
+    Swal.fire({
+
+        icon: "success",
+
+        title: "Berhasil",
+
+        text: success,
+
+        timer: 1800,
+
+        showConfirmButton: false
+
+    });
+
+}
