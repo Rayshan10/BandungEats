@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Resep;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ResepController extends Controller
@@ -15,7 +14,7 @@ class ResepController extends Controller
     public function tampil(Request $request)
     {
         $resep = Resep::latest()->get();
-        return view('resep.tampil', compact('resep'));
+        return view('dashboard.resep.tampil', compact('resep'));
     }
 
     /**
@@ -112,7 +111,8 @@ class ResepController extends Controller
     public function edit($id)
     {
         $resep = Resep::findOrFail($id);
-        return view('resep.edit', compact('resep'));
+
+        return view('dashboard.resep.edit', compact('resep'));
     }
 
     /**
@@ -124,14 +124,16 @@ class ResepController extends Controller
             'category' => 'required|string',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'video' => 'nullable|regex:/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
+            'video' => ['nullable','regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/'],
             'difficulty' => 'required|string',
             'servings' => 'required|string',
             'time' => 'required|string',
             'ingredients' => 'required|string',
             'steps' => 'required|string',
             'image' => 'nullable|image|max:2048',
-        ]);
+            ],[
+                'video.regex' => 'Link harus berasal dari YouTube.'
+            ]);
 
         $resep = Resep::findOrFail($id);
         $resep->update([
@@ -154,7 +156,7 @@ class ResepController extends Controller
             $resep->update(['gambar' => $path]);
         }
 
-        return redirect()->route('resep.tampil')->with('success', 'Resep berhasil diperbarui!');
+        return redirect()->route('dashboard.resep')->with('success', 'Resep berhasil diperbarui!');
     }
 
     /**

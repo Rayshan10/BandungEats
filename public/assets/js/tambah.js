@@ -257,9 +257,9 @@ if (success) {
 
 const previewBtn = document.getElementById("previewRecipe");
 
-if(previewBtn){
+if (previewBtn) {
 
-    previewBtn.addEventListener("click",()=>{
+    previewBtn.addEventListener("click", () => {
 
         document.getElementById("previewTitle").innerText =
             document.querySelector("[name='title']").value;
@@ -268,13 +268,13 @@ if(previewBtn){
             document.querySelector("[name='category']").value;
 
         document.getElementById("previewTime").innerText =
-            "⏱ "+document.querySelector("[name='time']").value;
+            "⏱ " + document.querySelector("[name='time']").value;
 
         document.getElementById("previewDifficulty").innerText =
-            "⭐ "+document.querySelector("[name='difficulty']").value;
+            "⭐ " + document.querySelector("[name='difficulty']").value;
 
         document.getElementById("previewServings").innerText =
-            "🍽 "+document.querySelector("[name='servings']").value;
+            "🍽 " + document.querySelector("[name='servings']").value;
 
         document.getElementById("previewDescription").innerText =
             document.querySelector("[name='description']").value;
@@ -286,7 +286,7 @@ if(previewBtn){
             document.querySelector("[name='steps']").value;
 
         // Preview Foto
-        if(imagePreview.src){
+        if (imagePreview.src) {
 
             document.getElementById("previewImage").src =
                 imagePreview.src;
@@ -297,7 +297,7 @@ if(previewBtn){
         }
 
         // Preview Thumbnail YouTube
-        if(youtubePreview.src){
+        if (youtubePreview.src) {
 
             document.getElementById("previewYoutube").src =
                 youtubePreview.src;
@@ -312,5 +312,27 @@ if(previewBtn){
         ).show();
 
     });
+
+}
+
+// =====================================
+// Existing Image (Edit Page)
+// =====================================
+
+if (imagePreview && imagePreview.src && imagePreview.getAttribute("src") !== "") {
+
+    previewContainer.classList.remove("d-none");
+
+    uploadArea.classList.add("d-none");
+
+}
+
+// =====================================
+// Existing YouTube (Edit Page)
+// =====================================
+
+if (videoInput && videoInput.value.trim() !== "") {
+
+    videoInput.dispatchEvent(new Event("input"));
 
 }

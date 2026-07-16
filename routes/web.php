@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AddController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
@@ -22,7 +21,6 @@ Route::get('/resep', [ResepController::class, 'tampil'])->name('resep.tampil');
 Route::get('/kategori/{kategori}', [ResepController::class, 'kategori'])->name('resep.kategori');
 Route::get('/resep/{id}', [ResepController::class, 'show'])->name('resep.show');
 Route::get('/search', [ResepController::class, 'search'])->name('resep.search');
-Route::get('/resep/{id}', [ResepController::class, 'show'])->name('resep.show');
 Route::get('/rekomendasi', [ResepController::class, 'rekomendasi'])->name('resep.rekomendasi');
 
 // Authentication Routes

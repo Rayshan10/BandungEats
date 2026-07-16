@@ -94,25 +94,33 @@
                             <td>{{ $item->porsi }}</td>
                             <td>
                                 <div class="d-flex gap-2">
+
                                     <a href="{{ route('resep.show',$item->id) }}"
-                                    class="btn btn-outline-primary btn-sm">
+                                        class="btn btn-outline-primary btn-sm">
                                         <i class="bi bi-eye"></i>
                                     </a>
+
                                     <a href="{{ route('resep.edit',$item->id) }}"
-                                    class="btn btn-outline-warning btn-sm">
+                                        class="btn btn-outline-warning btn-sm">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
+
                                     <form
                                         action="{{ route('resep.destroy',$item->id) }}"
                                         method="POST">
+
                                         @csrf
                                         @method('DELETE')
+
                                         <button
-                                            class="btn btn-outline-danger btn-sm"
-                                            onclick="return confirm('Yakin ingin menghapus resep ini?')">
+                                            class="btn btn-outline-danger btn-sm">
+
                                             <i class="bi bi-trash"></i>
+
                                         </button>
+
                                     </form>
+
                                 </div>
                             </td>
                         </tr>
