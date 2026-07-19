@@ -95,7 +95,7 @@
                             <td>
                                 <div class="d-flex gap-2">
 
-                                    <a href="{{ route('resep.show',$item->id) }}"
+                                    <a href="{{ route('dashboard.resep.show',$item->id) }}"
                                         class="btn btn-outline-primary btn-sm">
                                         <i class="bi bi-eye"></i>
                                     </a>

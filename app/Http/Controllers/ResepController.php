@@ -180,7 +180,7 @@ class ResepController extends Controller
             return abort(404, 'Resep tidak ditemukan');
         }
 
-        return view('resep.detail', compact('resep'));
+        return view('dashboard.resep.show', compact('resep'));
     }
         public function search(Request $request)
     {
