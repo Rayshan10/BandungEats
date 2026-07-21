@@ -1,17 +1,31 @@
+const printButton = document.getElementById("printRecipe");
+
+if (printButton) {
+
+    printButton.onclick = () => {
+
+        window.print();
+
+    };
+
+}
+
 const recipeImage=document.getElementById("recipeImage");
 
 const modalImage=document.getElementById("modalImage");
 
 if(recipeImage){
-
-    recipeImage.onclick=()=>{
-
-        modalImage.src=recipeImage.src;
-
+    
+    recipeImage.onclick=function(){
+        
+        modalImage.src=this.src;
+        
         new bootstrap.Modal(
+            
             document.getElementById("imageModal")
+        
         ).show();
-
+    
     }
 
 }

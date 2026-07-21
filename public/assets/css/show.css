@@ -24,27 +24,19 @@
 }
 
 /* ===========================
-   BAHAN
+    BAHAN
 =========================== */
 
 .ingredient-item{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
-
     padding:12px 0;
-
     border-bottom:1px solid #f2f2f2;
-
 }
 
 .ingredient-item:last-child{
-
     border-bottom:none;
-
 }
 
 /* ===========================
@@ -72,4 +64,119 @@
 
 .step-text{
     line-height:1.8;
+}
+
+.recipe-image{
+    transition:.3s;
+    cursor:zoom-in;
+}
+
+.recipe-image:hover{
+    transform:scale(1.02);
+}
+
+#imageModal .modal-content{
+    background:transparent;
+    box-shadow:none;
+}
+
+#modalImage{
+    border-radius:20px;
+}
+
+/* =====================================
+    YOUTUBE CARD
+===================================== */
+
+.youtube-card{
+    position:relative;
+    display:block;
+    overflow:hidden;
+    border-radius:20px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.youtube-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
+
+.youtube-thumb{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    transition:.3s;
+}
+
+.youtube-card:hover .youtube-thumb{
+    transform:scale(1.05);
+}
+
+.play-button{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:rgba(255,0,0,.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:42px;
+    transition:.3s;
+}
+
+.youtube-card:hover .play-button{
+    transform:translate(-50%,-50%) scale(1.15);
+    background:#ff0000;
+}
+
+/* ==========================
+        PRINT
+========================== */
+
+@media print{
+    body{
+        background:white !important;
+    }
+
+    .admin-sidebar,
+
+    .admin-topbar,
+
+    .btn,
+
+    .modal,
+
+    .play-button{
+        display:none !important;
+    }
+
+    .admin-main{
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .admin-content{
+        padding:0 !important;
+    }
+
+    #printArea{
+        width:100%;
+        margin:0;
+        padding:20px;
+    }
+
+    .card{
+        border:none !important;
+        box-shadow:none !important;
+    }
+
+    img{
+        max-width:500px;
+    }
 }
