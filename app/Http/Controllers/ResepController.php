@@ -111,8 +111,9 @@ class ResepController extends Controller
     public function edit($id)
     {
         $resep = Resep::findOrFail($id);
+        $youtubeId=$this->getYoutubeIdFromUrl($resep->link);
 
-        return view('dashboard.resep.edit', compact('resep'));
+        return view('dashboard.resep.edit', compact('resep','youtubeId'));
     }
 
     /**

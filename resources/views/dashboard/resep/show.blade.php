@@ -49,19 +49,19 @@
 
                 <div class="mt-3 d-flex gap-2 flex-wrap">
                     <span class="badge bg-primary">
-                        {{ $resep->kategori }}
+                        {{ ucfirst($resep->kategori) }}
                     </span>
 
                     <span class="badge bg-success">
-                        {{ $resep->kesulitan }}
+                        {{ ucfirst($resep->kesulitan) }}
                     </span>
 
                     <span class="badge bg-warning text-dark">
-                        {{ $resep->waktu }}
+                        {{ ucfirst($resep->waktu) }}
                     </span>
 
                     <span class="badge bg-info">
-                        {{ $resep->porsi }}
+                        {{ ucfirst($resep->porsi) }}
                     </span>
                 </div>
             </div>
@@ -75,11 +75,12 @@
                             Foto Resep
                         </h5>
 
-                        <img
-                            id="recipeImage"
-                            src="{{ asset('storage/'.$resep->gambar) }}"
-                            class="img-fluid rounded-4 recipe-image"
-                            style="cursor: zoom-in;">
+                        <div class="recipe-image-wrapper">
+                            <img
+                                src="{{ asset('storage/'.$resep->gambar) }}"
+                                class="recipe-image"
+                                id="recipeImage">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,11 +112,6 @@
                                     <i class="bi bi-play-fill"></i>
                                 </div>
                             </a>
-                            <div class="text-center mt-3">
-                                <small class="text-muted">
-                                    Klik thumbnail untuk membuka video tutorial di YouTube.
-                                </small>
-                            </div>
 
                         @else
                             <div class="alert alert-secondary">

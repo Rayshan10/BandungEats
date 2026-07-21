@@ -35,3 +35,12 @@
         background-color: #45a049;
         border-color: #45a049;
     }
+
+.table tbody tr{
+    transition:.25s;
+}
+
+.table tbody tr:hover{
+    background:#f8fbff;
+    transform:scale(1.003);
+}

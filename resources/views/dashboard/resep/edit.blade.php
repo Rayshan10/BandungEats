@@ -47,8 +47,8 @@
                                 type="text"
                                 name="title"
                                 class="form-control @error('title') is-invalid @enderror"
-                                placeholder="Contoh: Surabi Bandung"
-                                value="{{ old('title', $resep->title) }}">
+                                value="{{ old('title', $resep->title) }}"
+                                placeholder="Contoh: Surabi Bandung">
 
                             @error('title')
                                 <div class="invalid-feedback">
@@ -292,10 +292,12 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="text-center">
+                        <div class="mt-3">
                             <img
                                 id="youtubePreview"
-                                class="img-fluid rounded shadow-sm d-none">
+                                class="img-fluid rounded-4
+                                {{ $resep->link ? '' : 'd-none' }}"
+                                src="{{ $resep->link ? 'https://img.youtube.com/vi/'.$youtubeId.'/hqdefault.jpg' : '' }}">
                         </div>
                     </div>
                 </div>

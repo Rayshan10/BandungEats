@@ -242,18 +242,26 @@ INVENTORY
 }
 
 .recipe-thumb{
+    transition:.3s;
     width:70px;
     height:70px;
     object-fit:cover;
     border-radius:12px;
 }
 
+.recipe-thumb:hover{
+    transform:scale(1.08);
+}
+
 .inventory-table tbody tr{
     transition:.25s;
+    cursor:pointer;
 }
 
 .inventory-table tbody tr:hover{
-    background:#F9FCFF;
+    background:#f8fbff;
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.04);
 }
 
 .upload-area{
