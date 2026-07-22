@@ -25,7 +25,7 @@
                 <!-- Jika user sudah login -->
                 <li class="profile-dropdown">
                     <div class="profile-icon">
-                        <img src="{{ auth()->user()->getProfilePhotoUrl() }}" alt="Profile" class="rounded-full w-10 h-10 object-cover">
+                        <img src="{{ auth()->user()->getProfilePhotoUrlAttribute() }}" alt="Profile" class="rounded-full w-10 h-10 object-cover">
                     </div>
                     <ul class="dropdown-menu">
                         <li><a href="/profile" class="dropdown-item">Edit Akun</a></li>

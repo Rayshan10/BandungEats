@@ -16,10 +16,16 @@ class UserController extends Controller
     {
         $users = User::latest()->get();
 
-        return view(
-            'dashboard.user.tampil',
-            compact('users')
-        );
+        $totalUser = User::count();
+        $totalAdmin = User::where('role', 'admin')->count();
+        $totalMember = User::where('role', 'user')->count();
+
+        return view('dashboard.user.tampil', compact(
+            'users',
+            'totalUser',
+            'totalAdmin',
+            'totalMember'
+        ));
     }
 
     /**

@@ -48,11 +48,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function getProfilePhotoUrl()
+    public function getProfilePhotoUrlAttribute()
     {
-        return $this->profile_photo 
-            ? asset('storage/' . $this->profile_photo) 
-            : asset('assets/img/default-profile.png'); // Ganti dengan gambar default
+        return $this->profile_photo
+            ? asset('storage/' . $this->profile_photo)
+            : asset('assets/img/default-profile.png');
     }
 
     public function isAdmin(): bool

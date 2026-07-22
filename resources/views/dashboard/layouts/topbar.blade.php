@@ -8,7 +8,7 @@
 
         @auth
             <img
-                src="{{ auth()->user()->getProfilePhotoUrl() }}"
+                src="{{ auth()->user()->getProfilePhotoUrlAttribute() }}"
                 alt="Profile">
 
             <span>{{ auth()->user()->name }}</span>
