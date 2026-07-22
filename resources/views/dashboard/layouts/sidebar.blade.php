@@ -21,9 +21,9 @@
         </li>
 
         <li>
-            <a href="{{ route('users.index') }}">
+            <a href="{{ route('dashboard.user') }}" class="sidebar-link">
                 <i class="bi bi-people-fill"></i>
-                Kelola User
+                <span>Kelola User</span>
             </a>
         </li>
 

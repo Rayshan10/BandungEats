@@ -299,3 +299,25 @@ INVENTORY
     color:#666;
 }
 
+.user-thumb{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.user-thumb:hover{
+    transform:scale(1.08);
+}
+
+.inventory-table tbody tr{
+    transition:.25s;
+}
+
+.inventory-table tbody tr:hover{
+    background:#f8fbff;
+    transform:translateY(-2px);
+}

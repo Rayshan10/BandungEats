@@ -14,8 +14,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $users = User::latest()->get();
+
+        return view(
+            'dashboard.user.tampil',
+            compact('users')
+        );
     }
 
     /**
