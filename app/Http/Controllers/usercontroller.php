@@ -65,9 +65,14 @@ class UserController extends Controller
     /**
      * Display the specified user.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return response()->json($user);
+        $user = User::withCount('bookmarks')->findOrFail($id);
+
+        return view(
+            'dashboard.user.show',
+            compact('user')
+        );
     }
 
     /**

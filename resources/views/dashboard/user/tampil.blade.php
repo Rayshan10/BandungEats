@@ -69,9 +69,9 @@
                     </td>
                     <td>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary btn-sm">
+                            <a href="{{ route('dashboard.user.show', $user->id) }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-eye"></i>
-                            </button>
+                            </a>
                             <button class="btn btn-outline-danger btn-sm">
                                 <i class="bi bi-trash"></i>
                             </button>
