@@ -67,7 +67,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::withCount('bookmarks')->findOrFail($id);
+        $user = User::with([
+            'bookmarks'
+        ])->withCount('bookmarks')
+        ->findOrFail($id);
 
         return view(
             'dashboard.user.show',

@@ -335,3 +335,58 @@ INVENTORY
     width:180px;
     color:#666;
 }
+
+.profile-card{
+    padding:40px 30px;
+}
+
+.profile-card hr{
+    opacity:.12;
+    margin:25px 0;
+}
+
+.info-item{
+    display:flex;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-item i{
+    width:30px;
+    font-size:22px;
+    color:#fd7e14;
+}
+
+.info-item label{
+    font-size:.85rem;
+    color:#6c757d;
+    margin-bottom:3px;
+}
+
+.info-item h6{
+    margin:0;
+    font-weight:600;
+}
+
+.bookmark-card{
+    transition:.3s;
+}
+
+.bookmark-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.stat-card{
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
