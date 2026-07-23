@@ -16,11 +16,6 @@
             pengguna.
         </small>
     </div>
-    
-    <a href="#" class="btn btn-primary inventory-btn">
-        <i class="bi bi-plus-circle"></i>
-        Tambah User
-    </a>
 </div>
 
 <div class="inventory-toolbar">
@@ -28,12 +23,6 @@
         <i class="bi bi-search"></i>
         <input type="text" class="form-control" id="searchUser" placeholder="Cari user...">
     </div>
-    
-    <select class="form-select" id="roleFilter">
-        <option value="">Semua Role</option>
-        <option value="admin">Admin</option>
-        <option value="user">User</option>
-    </select>
 </div>
 
 <div class="card inventory-table">
@@ -44,8 +33,9 @@
                     <th>Foto</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Bookmark</th>
                     <th>Bergabung</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -65,26 +55,22 @@
                         {{ $user->email }}
                     </td>
                     <td>
-                        @if($user->role=='admin')
-                        <span class="badge bg-danger">
-                            Admin
-                        </span>
-                        @else
-                        <span class="badge bg-primary">
-                            User
-                        </span>
-                        @endif
+                        {{ $user->bookmarks_count }}
                     </td>
                     <td>
                         {{ $user->created_at->format('d M Y') }}
                     </td>
                     <td>
+                        @if($user->status == 'active')
+                        <span class="badge bg-success">Aktif</span>
+                        @else
+                        <span class="badge bg-danger">Nonaktif</span>
+                        @endif
+                    </td>
+                    <td>
                         <div class="d-flex gap-2">
                             <button class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-eye"></i>
-                            </button>
-                            <button class="btn btn-outline-warning btn-sm">
-                                <i class="bi bi-pencil-square"></i>
                             </button>
                             <button class="btn btn-outline-danger btn-sm">
                                 <i class="bi bi-trash"></i>

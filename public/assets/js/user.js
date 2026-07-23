@@ -5,19 +5,6 @@ search.addEventListener("keyup",()=>{
     rows.forEach(row=>{
         row.style.display=row.innerText.toLowerCase().includes(value)
         ? ""
-        : "none";
-    });
-});
-
-const roleFilter=document.getElementById("roleFilter");
-roleFilter.addEventListener("change",()=>{
-    rows.forEach(row=>{
-        const role=row.cells[3].innerText.toLowerCase();
-        row.style.display=
-        roleFilter.value=="" ||
-        role==roleFilter.value
-        ?""
-        :
-        "none";
+        :"none";
     });
 });

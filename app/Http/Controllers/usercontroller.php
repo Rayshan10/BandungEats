@@ -14,17 +14,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->get();
+        $users = User::where('role', 'user')
+        ->withCount('bookmarks')
+        ->latest()
+        ->get();
 
-        $totalUser = User::count();
-        $totalAdmin = User::where('role', 'admin')->count();
-        $totalMember = User::where('role', 'user')->count();
+        $totalUser = $users->count();
 
         return view('dashboard.user.tampil', compact(
             'users',
-            'totalUser',
-            'totalAdmin',
-            'totalMember'
+            'totalUser'
         ));
     }
 
