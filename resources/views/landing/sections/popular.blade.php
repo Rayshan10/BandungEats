@@ -48,7 +48,7 @@
                             {{ $resep->kesulitan }}
                         </div>
                         <a
-                            href="{{ route('resep.show',$resep->id) }}"
+                            href="{{ route('resep.detail',$resep->id) }}"
                             class="btn btn-primary btn-sm">
                             Lihat Resep
                         </a>

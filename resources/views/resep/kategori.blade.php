@@ -1,6 +1,6 @@
-@extends('layout')
+@extends('layouts.app')
 
-@section('konten')
+@section('content')
 <head>
     <title>Daftar Resep: {{ ucfirst($kategori) }}</title>
 <link rel="stylesheet" href="{{ asset('assets/css/kategori.css') }}">

@@ -22,6 +22,7 @@ Route::get('/kategori/{kategori}', [ResepController::class, 'kategori'])->name('
 Route::get('/resep/{id}', [ResepController::class, 'show'])->name('resep.show');
 Route::get('/search', [ResepController::class, 'search'])->name('resep.search');
 Route::get('/rekomendasi', [ResepController::class, 'rekomendasi'])->name('resep.rekomendasi');
+Route::get('/resep/detail/{id}', [ResepController::class, 'detail'])->name('resep.detail');
 
 // Authentication Routes
 Route::get('/login', function () {

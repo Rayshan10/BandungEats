@@ -200,6 +200,13 @@ class ResepController extends Controller
         return view('landing.home', compact('rekomendasiResep'));
     }
 
+    public function detail($id)
+    {
+        $resep = Resep::findOrFail($id);
+
+        return view('resep.detail', compact('resep'));
+    }
+
     protected function getYoutubeIdFromUrl(?string $link)
     {
         if (!$link) {
