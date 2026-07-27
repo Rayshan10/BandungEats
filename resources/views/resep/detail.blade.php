@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
     <nav class="mb-4">
-        <a href="{{ route('resep.tampil') }}" class="text-decoration-none">
+        <a href="{{ route('recipes.index') }}" class="text-decoration-none">
             Semua Resep
         </a>
 
@@ -124,7 +124,7 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-5">
-        <a href="{{ route('resep.tampil') }}" class="btn btn-outline-secondary btn-lg rounded-pill">
+        <a href="{{ route('recipes.index') }}" class="btn btn-outline-secondary btn-lg rounded-pill">
             <i class="bi bi-arrow-left"></i>
             Kembali
         </a>

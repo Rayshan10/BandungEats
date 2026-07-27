@@ -207,6 +207,25 @@ class ResepController extends Controller
         return view('resep.detail', compact('resep'));
     }
 
+        public function daftarResep(Request $request)
+    {
+        $query = Resep::query();
+
+        // Search
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter kategori
+        if ($request->filled('kategori')) {
+            $query->where('kategori', $request->kategori);
+        }
+
+        $resep = $query->latest()->paginate(9);
+
+        return view('resep.index', compact('resep'));
+    }
+
     protected function getYoutubeIdFromUrl(?string $link)
     {
         if (!$link) {
