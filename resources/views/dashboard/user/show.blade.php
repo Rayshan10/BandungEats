@@ -159,4 +159,97 @@
         </div>
     </div>
 </div>
+<div class="card shadow-sm border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-white border-0 py-3">
+
+        <h4 class="fw-bold mb-0">
+
+            <i class="bi bi-bookmark-heart-fill text-danger"></i>
+
+            Resep yang Dibookmark
+
+            <span class="badge bg-primary ms-2">
+
+                {{ $user->bookmarks_count }}
+
+            </span>
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        @forelse($user->bookmarks as $bookmark)
+
+<div class="bookmark-card">
+
+    <img
+        src="{{ asset('storage/'.$bookmark->gambar) }}"
+        class="bookmark-image">
+
+    <div class="bookmark-content">
+
+        <h5 class="fw-bold mb-2">
+
+            {{ $bookmark->nama }}
+
+        </h5>
+
+        <p class="text-muted mb-2">
+
+            {{ Str::limit($bookmark->deskripsi,100) }}
+
+        </p>
+
+        <span class="badge bg-warning text-dark">
+
+            {{ ucfirst($bookmark->kategori) }}
+
+        </span>
+
+    </div>
+
+    <div>
+
+        <a
+            href="{{ route('resep.show',$bookmark->id) }}"
+            class="btn btn-primary">
+
+            <i class="bi bi-eye"></i>
+
+            Detail
+
+        </a>
+
+    </div>
+
+</div>
+
+@empty
+
+<div class="text-center py-5">
+
+    <i class="bi bi-bookmark-x fs-1 text-secondary"></i>
+
+    <h5 class="mt-3">
+
+        Belum ada bookmark
+
+    </h5>
+
+    <p class="text-muted">
+
+        User ini belum menyimpan resep favorit.
+
+    </p>
+
+</div>
+
+@endforelse
+
+    </div>
+
+</div>
 @endsection

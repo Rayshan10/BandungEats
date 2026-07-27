@@ -26,19 +26,5 @@
                 <span>Kelola User</span>
             </a>
         </li>
-
-        <li>
-            <a href="/bookmarks">
-                <i class="bi bi-bookmark-heart-fill"></i>
-                Bookmark
-            </a>
-        </li>
-
-        <li>
-            <a href="/profile">
-                <i class="bi bi-person-circle"></i>
-                Profile
-            </a>
-        </li>
     </ul>
 </aside>

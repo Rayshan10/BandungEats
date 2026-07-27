@@ -390,3 +390,51 @@ INVENTORY
     transform:translateY(-6px);
     box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
+
+/* ============================
+   Bookmark Card
+============================ */
+
+.bookmark-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:18px;
+    border:1px solid #e9ecef;
+    border-radius:16px;
+    margin-bottom:20px;
+    transition:.3s;
+    background:#fff;
+}
+
+.bookmark-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.bookmark-image{
+    width:140px;
+    height:100px;
+    object-fit:cover;
+    border-radius:12px;
+    flex-shrink:0;
+}
+
+.bookmark-content{
+    flex:1;
+}
+
+.bookmark-content h5{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.bookmark-content p{
+    margin-bottom:10px;
+    color:#6c757d;
+    line-height:1.6;
+}
+
+.bookmark-content .badge{
+    font-size:.8rem;
+}
