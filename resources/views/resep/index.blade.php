@@ -10,6 +10,10 @@
                     🍽️ Bandung Culinary
                 </span>
 
+                @php
+                    $judulKategori = request('kategori');
+                @endphp
+
                 <h1 class="display-5 fw-bold">
                     Semua
                     <span class="text-primary">
@@ -62,7 +66,7 @@
             Semua
         </a>
 
-        @foreach(['Minuman','Pedas','Manis','Jajanan','Kuah','Tumis'] as $kategori)
+        @foreach(['Minuman','Pedas','Gurih','Manis','Jajanan','Kuah','Tumis'] as $kategori)
 
         <a
             href="{{ route('recipes.index',['kategori'=>$kategori]) }}"
@@ -101,6 +105,18 @@ function loadRecipes(){
         params.append('kategori', currentKategori);
     }
 
+    document.getElementById('recipeContainer').innerHTML = `
+        <div class="text-center py-5">
+
+            <div class="spinner-border text-primary"></div>
+
+            <p class="mt-3 text-muted">
+                Memuat resep...
+            </p>
+
+        </div>
+        `;
+
     fetch("{{ route('recipes.index') }}?" + params.toString(),{
         headers:{
             'X-Requested-With':'XMLHttpRequest'
@@ -113,7 +129,7 @@ function loadRecipes(){
         document.getElementById('recipeContainer').innerHTML = html;
 
         // Update URL tanpa reload
-        history.pushState({},'', "{{ route('recipes.index') }}?" + params.toString());
+        history.replaceState({}, '', "{{ route('recipes.index') }}?" + params.toString());
     });
 }
 
@@ -139,6 +155,39 @@ document.querySelectorAll('.category-btn').forEach(button=>{
         this.classList.add('btn-primary');
         loadRecipes();
     });
+});
+
+window.addEventListener('popstate', function () {
+
+    const params = new URLSearchParams(window.location.search);
+
+    currentKategori = params.get('kategori') || '';
+
+    searchInput.value = params.get('search') || '';
+
+    document.querySelectorAll('.category-btn').forEach(btn => {
+
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-light');
+
+        if (btn.dataset.kategori === currentKategori) {
+
+            btn.classList.remove('btn-light');
+            btn.classList.add('btn-primary');
+
+        }
+
+        if (currentKategori === '' && btn.dataset.kategori === '') {
+
+            btn.classList.remove('btn-light');
+            btn.classList.add('btn-primary');
+
+        }
+
+    });
+
+    loadRecipes();
+
 });
 
 </script>

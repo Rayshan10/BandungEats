@@ -36,31 +36,31 @@
                 'title' => 'Pedas',
                 'image' => 'pedas.jpg',
                 'icon'  => '🌶',
-                'route' => '/kategori/pedas'
+                'route' => route('recipes.index', ['kategori' => 'Pedas'])
             ],
             [
                 'title' => 'Gurih',
                 'image' => 'gurih.jpg',
                 'icon'  => '🍗',
-                'route' => '/kategori/gurih'
+                'route' => route('recipes.index', ['kategori' => 'Gurih'])
             ],
             [
                 'title' => 'Manis',
                 'image' => 'manis.jpg',
                 'icon'  => '🍰',
-                'route' => '/kategori/manis'
+                'route' => route('recipes.index', ['kategori' => 'Manis'])
             ],
             [
                 'title' => 'Jajanan',
                 'image' => 'jajanan.jpg',
                 'icon'  => '🍢',
-                'route' => '/kategori/jajanan'
+                'route' => route('recipes.index', ['kategori' => 'Jajanan'])
             ],
             [
                 'title' => 'Minuman',
                 'image' => 'minuman.jpg',
                 'icon'  => '🥤',
-                'route' => '/kategori/minuman'
+                'route' => route('recipes.index', ['kategori' => 'Minuman'])
             ],
             [
                 'title' => 'Favorit',

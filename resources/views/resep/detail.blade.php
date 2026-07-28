@@ -213,6 +213,16 @@
                     );
                 }
 
+                Swal.fire({
+                    toast:true,
+                    position:'top-end',
+                    icon:'success',
+                    title:'Bookmark berhasil disimpan',
+                    showConfirmButton:false,
+                    timer:1800,
+                    timerProgressBar:true
+                });
+
             }else{
                 button.classList.remove('btn-warning');
                 button.classList.add('btn-danger');
@@ -223,6 +233,16 @@
                 form.action="{{ url('/bookmarks') }}/{{ $resep->id }}";
 
                 form.querySelector('input[name="_method"]')?.remove();
+
+                Swal.fire({
+                    toast:true,
+                    position:'top-end',
+                    icon:'info',
+                    title:'Bookmark dihapus',
+                    showConfirmButton:false,
+                    timer:1800,
+                    timerProgressBar:true
+                });
             }
         });
     });

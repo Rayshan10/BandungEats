@@ -93,14 +93,26 @@
 </div>
 
 <script>
-document.addEventListener('submit',function(e){
+document.addEventListener('submit', async function(e){
     if(!e.target.classList.contains('deleteBookmarkForm')){
         return;
     }
 
     e.preventDefault();
 
-    if(!confirm("Hapus bookmark ini?")){
+    const result = await Swal.fire({
+        title: 'Hapus Bookmark?',
+        text: 'Bookmark akan dihapus dari daftar favorit.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Ya, Hapus',
+        cancelButtonText: 'Batal',
+        reverseButtons: true
+    });
+
+    if(!result.isConfirmed){
         return;
     }
 
@@ -126,6 +138,16 @@ document.addEventListener('submit',function(e){
             setTimeout(()=>{
                 card.remove();
             },400);
+
+            Swal.fire({
+                toast:true,
+                position:'top-end',
+                icon:'success',
+                title:'Bookmark berhasil dihapus',
+                showConfirmButton:false,
+                timer:1800,
+                timerProgressBar:true
+            });
 
             document.getElementById('bookmarkCount').innerText=data.total;
         }
