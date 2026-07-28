@@ -223,6 +223,12 @@ class ResepController extends Controller
 
         $resep = $query->latest()->paginate(9);
 
+        if ($request->ajax()) {
+
+            return view('resep.partials.recipe-grid', compact('resep'));
+
+        }
+
         return view('resep.index', compact('resep'));
     }
 
