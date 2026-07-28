@@ -131,30 +131,35 @@
 
         @auth
             @if(auth()->user()->role === 'user')
+            <form
+                class="bookmarkForm"
+                action="{{ auth()->user()->bookmarks->contains($resep->id)
+                        ? route('bookmarks.destroy',$resep->id)
+                        : route('bookmarks.store',$resep->id) }}"
+                method="POST">
+
+                @csrf
+
                 @if(auth()->user()->bookmarks->contains($resep->id))
-                    <form action="{{ route('bookmarks.destroy',$resep->id) }}"
-                        method="POST">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button
-                            class="btn btn-warning btn-lg rounded-pill px-4">
-                            <i class="bi bi-bookmark-check-fill me-2"></i>
-                            Hapus Bookmark
-                        </button>
-                    </form>
-                @else
-                    <form action="{{ route('bookmarks.store',$resep->id) }}"
-                        method="POST">
-                        @csrf
-                        <button
-                            class="btn btn-danger btn-lg rounded-pill px-4">
-                            <i class="bi bi-heart-fill me-2"></i>
-                            Simpan Bookmark
-                        </button>
-                    </form>
+                    @method('DELETE')
                 @endif
+
+                <button
+                    type="submit"
+                    class="btn bookmarkButton rounded-pill px-4
+                    {{ auth()->user()->bookmarks->contains($resep->id)
+                        ? 'btn-warning'
+                        : 'btn-danger' }}">
+
+                    @if(auth()->user()->bookmarks->contains($resep->id))
+                        <i class="bi bi-bookmark-check-fill me-2"></i>
+                        <span>Hapus Bookmark</span>
+                    @else
+                        <i class="bi bi-heart-fill me-2"></i>
+                        <span>Simpan Bookmark</span>
+                    @endif
+                </button>
+            </form>
             @endif
         @else
             <a href="{{ route('login') }}"
@@ -165,6 +170,63 @@
         @endauth
     </div>
 </div>
+
+<script>
+    document.addEventListener('submit',function(e){
+        if(!e.target.classList.contains('bookmarkForm')){
+            return;
+        }
+
+        e.preventDefault();
+
+        const form=e.target;
+
+        fetch(form.action,{
+            method:'POST',
+
+            headers:{
+                'X-CSRF-TOKEN':'{{ csrf_token() }}',
+                'X-Requested-With':'XMLHttpRequest'
+            },
+
+            body:new FormData(form)
+        })
+
+        .then(res=>res.json())
+
+        .then(data=>{
+            const button=form.querySelector('.bookmarkButton');
+
+            if(data.action==="added"){
+                button.classList.remove('btn-danger');
+                button.classList.add('btn-warning');
+
+                button.innerHTML=
+                '<i class="bi bi-bookmark-check-fill me-2"></i>Hapus Bookmark';
+
+                form.action="{{ url('/bookmarks') }}/{{ $resep->id }}";
+
+                if(!form.querySelector('input[name="_method"]')){
+                    form.insertAdjacentHTML(
+                        'beforeend',
+                        '<input type="hidden" name="_method" value="DELETE">'
+                    );
+                }
+
+            }else{
+                button.classList.remove('btn-warning');
+                button.classList.add('btn-danger');
+
+                button.innerHTML=
+                '<i class="bi bi-heart-fill me-2"></i>Simpan Bookmark';
+
+                form.action="{{ url('/bookmarks') }}/{{ $resep->id }}";
+
+                form.querySelector('input[name="_method"]')?.remove();
+            }
+        });
+    });
+</script>
 
 <style>
 .recipe-image{

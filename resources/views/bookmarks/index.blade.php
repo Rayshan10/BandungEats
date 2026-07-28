@@ -1,12 +1,83 @@
-@extends('layout')
+@extends('layouts.app')
 
-@section('konten')
+@section('content')
 <div class="container mt-4">
-    <a href="/home" class="text-decoration-none text-dark">
-        <i class="bi bi-arrow-left" style="font-size: 1.5rem;"></i>
-    </a>
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Resep Favorit</h1>
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <a href="{{ route('home') }}"
+            class="btn btn-light rounded-pill shadow-sm mb-3">
+                <i class="bi bi-arrow-left"></i>
+                Kembali
+            </a>
+
+            <h1 class="display-5 fw-bold">
+                ❤️ Bookmark Saya
+            </h1>
+
+            <p class="text-muted fs-5">
+                Semua resep favorit yang telah Anda simpan.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h2 id="bookmarkCount" class="fw-bold text-danger">
+                        {{ auth()->user()->bookmarks()->count() }}
+                    </h2>
+                    <span class="text-muted">
+                        Total Bookmark
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h2 class="fw-bold text-primary">
+                        {{ auth()->user()->created_at->format('Y') }}
+                    </h2>
+
+                    <span class="text-muted">
+                        Bergabung
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                    <h2 class="fw-bold text-success">
+                        ❤
+                    </h2>
+
+                    <span class="text-muted">
+                        Favorit Saya
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 mb-5">
+        <div class="card-body">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-0">
+                    <i class="bi bi-search"></i>
+                </span>
+
+                <input
+                    id="bookmarkSearch"
+                    type="text"
+                    class="form-control border-0"
+                    placeholder="Cari bookmark favoritmu..."
+                    autocomplete="off">
+            </div> 
+        </div>
     </div>
 
     @if(session('success'))
@@ -16,71 +87,73 @@
         </div>
     @endif
 
-    @if($bookmarkedReseps->count() > 0)
-        <div class="row">
-            @foreach($bookmarkedReseps as $item)
-                <div class="col-md-12 mb-4">
-                    <div class="card">
-                        <div class="row g-0">
-                            <div class="col-md-4 d-flex align-items-center">
-                                @if($item->gambar)
-                                    <img src="{{ asset('storage/' . $item->gambar) }}" 
-                                        class="img-fluid rounded-start w-100" 
-                                        alt="{{ $item->judul }}"
-                                        style="height: 225px; object-fit: cover;">
-                                @endif
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="card-title">{{ $item->judul }}</h5>
-                                        <div class="action-buttons">
-                                            <a href="{{ route('resep.show', $item->id) }}" 
-                                                class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i> Lihat Detail
-                                            </a>
-                                            <form action="{{ route('bookmarks.destroy', $item->id) }}" 
-                                                method="POST" 
-                                                class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" 
-                                                        class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-heart-broken"></i> Hapus dari Favorit
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <p class="card-text">{{ Str::limit($item->deskripsi, 150) }}</p>
-                                    <p class="card-text">
-                                        <div class="d-flex gap-3 mb-4">
-                                            <div class="border rounded p-2 bg-primary text-white">
-                                                <div>{{ $item->kategori }}</div>
-                                            </div>
-                                            <div class="border rounded p-2">
-                                                <div>{{ $item->waktu }}</div>
-                                            </div>
-                                            <div class="border rounded p-2">
-                                                <div>{{ $item->kesulitan }}</div>
-                                            </div>
-                                            <div class="border rounded p-2">
-                                                <div>{{ $item->porsi }}</div>
-                                            </div>
-                                        </div>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @else
-        <div class="alert alert-info">
-            Belum ada resep yang ditambahkan ke favorit.
-            <a href="/home#resep" class="alert-link">Jelajahi resep</a>
-        </div>
-    @endif
+    <div id="bookmarkContainer">
+        @include('bookmarks.partials.bookmark-list')
+    </div>
 </div>
+
+<script>
+document.addEventListener('submit',function(e){
+    if(!e.target.classList.contains('deleteBookmarkForm')){
+        return;
+    }
+
+    e.preventDefault();
+
+    if(!confirm("Hapus bookmark ini?")){
+        return;
+    }
+
+    const form=e.target;
+
+    fetch(form.action,{
+        method:'POST',
+        headers:{
+            'X-CSRF-TOKEN':'{{ csrf_token() }}',
+            'X-Requested-With':'XMLHttpRequest'
+        },
+
+        body:new FormData(form)
+    })
+
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.success){
+            const card=form.closest('.bookmark-card');
+            card.style.transition=".4s";
+            card.style.opacity="0";
+            card.style.transform="translateX(-40px)";
+            setTimeout(()=>{
+                card.remove();
+            },400);
+
+            document.getElementById('bookmarkCount').innerText=data.total;
+        }
+    });
+});
+</script>
+
+<style>
+.bookmark-card{
+    transition:.35s;
+}
+
+.bookmark-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.bookmark-image{
+    width:100%;
+    height:225px;
+    object-fit:cover;
+    border-radius:18px;
+}
+
+.action-buttons{
+    display:flex;
+    gap:10px;
+}
+</style>
+
 @endsection
