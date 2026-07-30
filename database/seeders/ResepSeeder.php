@@ -7,6 +7,99 @@ use App\Models\Resep;
 
 class ResepSeeder extends Seeder
 {
+
+    private array $kategoriMap = [
+
+        'Pedas' => [
+            'balado',
+            'rica',
+            'geprek',
+            'mercon',
+            'sambal',
+            'seblak',
+            'woku',
+            'cabai',
+            'lado',
+            'pedas',
+            'teri balado',
+            'ayam penyet',
+        ],
+
+        'Kuah' => [
+            'soto',
+            'sup',
+            'sop',
+            'rawon',
+            'bakso',
+            'gulai',
+            'kari',
+            'coto',
+            'mie kocok',
+            'sayur asem',
+            'sayur bening',
+            'lontong kari',
+            'mie rebus',
+        ],
+
+        'Minuman' => [
+            'es ',
+            'jus',
+            'juice',
+            'kopi',
+            'teh',
+            'bandrek',
+            'bajigur',
+            'wedang',
+            'susu',
+            'milkshake',
+            'smoothie',
+            'sirup',
+            'cendol',
+            'es buah',
+        ],
+
+        'Manis' => [
+            'brownies',
+            'cake',
+            'bolu',
+            'puding',
+            'kolak',
+            'donat',
+            'klepon',
+            'lapis',
+            'roti',
+            'martabak manis',
+            'kue',
+            'dessert',
+        ],
+
+        'Jajanan' => [
+            'batagor',
+            'cireng',
+            'cilok',
+            'combro',
+            'misro',
+            'pempek',
+            'surabi',
+            'martabak',
+            'bakwan',
+            'lumpia',
+            'pastel',
+            'risol',
+            'tahu isi',
+            'otak',
+        ],
+
+        'Tumis' => [
+            'tumis',
+            'oseng',
+            'capcay',
+            'kangkung',
+            'cah ',
+        ],
+
+    ];
+
     public function run(): void
     {
         $file = database_path('dataset/Indonesian_Food_Recipes.csv');
@@ -23,14 +116,34 @@ class ResepSeeder extends Seeder
 
         $count = 0;
 
+        $statistik = [
+            'Pedas' => 0,
+            'Gurih' => 0,
+            'Manis' => 0,
+            'Jajanan' => 0,
+            'Minuman' => 0,
+            'Kuah' => 0,
+            'Tumis' => 0,
+        ];
+
         while (($row = fgetcsv($handle, 0, ",")) !== false) {
 
             // Import 10 data dulu untuk testing
-            if ($count >= 500) {
+            if ($count >= 50) {
                 break;
             }
 
-            $kategori = $this->getKategori($row[0]);
+            $kategori = $this->getKategori(
+                $row[0], // Title
+                $row[1], // Ingredients
+                $row[5]  // Category
+            );
+
+            $this->command->line(
+                "{$row[0]} ==> {$kategori}"
+            );
+
+            $statistik[$kategori]++;
 
             Resep::create([
 
@@ -61,89 +174,81 @@ class ResepSeeder extends Seeder
 
         fclose($handle);
 
-        $this->command->info("Berhasil mengimpor {$count} resep.");
+        $this->command->newLine();
+
+        $this->command->info('========== HASIL IMPORT ==========');
+
+        foreach ($statistik as $kategori => $jumlah) {
+
+            $this->command->line(
+                str_pad($kategori, 12) . ' : ' . $jumlah
+            );
+
+        }
+
+        $this->command->info('--------------------------------');
+
+        $this->command->info('Total Resep : '.$count);
+
+        $this->command->info('===============================');
     }
 
-    private function getKategori(string $judul): string
+    private function getKategori(
+        string $judul,
+        string $ingredients,
+        string $category
+    ): string
     {
+        $config = config('resep_kategori');
+
         $judul = strtolower($judul);
+        $ingredients = strtolower($ingredients);
+        $category = strtolower($category);
 
-        // Minuman
-        if (
-            str_contains($judul, 'es ') ||
-            str_contains($judul, 'jus') ||
-            str_contains($judul, 'bandrek') ||
-            str_contains($judul, 'bajigur') ||
-            str_contains($judul, 'wedang') ||
-            str_contains($judul, 'teh') ||
-            str_contains($judul, 'kopi') ||
-            str_contains($judul, 'susu')
-        ) {
-            return 'Minuman';
+        $score = [];
+
+        foreach ($config as $namaKategori => $rules) {
+
+            $score[$namaKategori] = 0;
+
+            // skor dari judul
+            foreach ($rules['judul'] as $keyword) {
+
+                if (str_contains($judul, strtolower($keyword))) {
+
+                    $score[$namaKategori] += 3;
+
+                }
+
+            }
+
+            // skor dari bahan
+            foreach ($rules['bahan'] as $keyword) {
+
+                if (str_contains($ingredients, strtolower($keyword))) {
+
+                    $score[$namaKategori] += 2;
+
+                }
+
+            }
+
+            // skor dari category dataset
+            foreach ($rules['category'] as $keyword) {
+
+                if (str_contains($category, strtolower($keyword))) {
+
+                    $score[$namaKategori] += 1;
+
+                }
+
+            }
+
         }
 
-        // Jajanan
-        if (
-            str_contains($judul, 'batagor') ||
-            str_contains($judul, 'cireng') ||
-            str_contains($judul, 'cilok') ||
-            str_contains($judul, 'combro') ||
-            str_contains($judul, 'misro') ||
-            str_contains($judul, 'martabak') ||
-            str_contains($judul, 'surabi') ||
-            str_contains($judul, 'otak') ||
-            str_contains($judul, 'pempek')
-        ) {
-            return 'Jajanan';
-        }
+        arsort($score);
 
-        // Manis
-        if (
-            str_contains($judul, 'cake') ||
-            str_contains($judul, 'brownies') ||
-            str_contains($judul, 'puding') ||
-            str_contains($judul, 'bolu') ||
-            str_contains($judul, 'donat') ||
-            str_contains($judul, 'roti') ||
-            str_contains($judul, 'kue') ||
-            str_contains($judul, 'kolak')
-        ) {
-            return 'Manis';
-        }
-
-        // Kuah
-        if (
-            str_contains($judul, 'soto') ||
-            str_contains($judul, 'sup') ||
-            str_contains($judul, 'sop') ||
-            str_contains($judul, 'bakso') ||
-            str_contains($judul, 'mie kocok')
-        ) {
-            return 'Kuah';
-        }
-
-        // Tumis
-        if (
-            str_contains($judul, 'tumis') ||
-            str_contains($judul, 'capcay') ||
-            str_contains($judul, 'oseng')
-        ) {
-            return 'Tumis';
-        }
-
-        // Pedas
-        if (
-            str_contains($judul, 'balado') ||
-            str_contains($judul, 'geprek') ||
-            str_contains($judul, 'rica') ||
-            str_contains($judul, 'sambal') ||
-            str_contains($judul, 'mercon') ||
-            str_contains($judul, 'seblak')
-        ) {
-            return 'Pedas';
-        }
-
-        return 'Gurih';
+        return array_key_first($score);
     }
 
     private function getGambar(string $kategori): string
