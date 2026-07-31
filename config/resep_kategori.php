@@ -102,6 +102,14 @@ return [
 
     'Jajanan' => [
 
+        'override' => [
+            'batagor',
+            'cireng',
+            'cilok',
+            'combro',
+            'misro',
+        ],
+
         'judul' => [
             'batagor',
             'cireng',
@@ -130,6 +138,15 @@ return [
     ],
 
     'Minuman' => [
+
+        'override' => [
+            'es ',
+            'jus',
+            'kopi',
+            'teh',
+            'bandrek',
+            'bajigur',
+        ],
 
         'judul' => [
             'es ',
@@ -162,6 +179,12 @@ return [
     ],
 
     'Kuah' => [
+
+        'override' => [
+            'soto',
+            'sup',
+            'sop',
+        ],
 
         'judul' => [
             'soto',
