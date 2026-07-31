@@ -16,48 +16,100 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $user = auth()->user();
-        
-        $rules = [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'profile_photo' => ['nullable', 'image', 'max:2048'], // max 2MB
-        ];
+        $user = $request->user();
 
-        // Add password validation only if password is being updated
-        if ($request->filled('current_password')) {
-            $rules += [
-                'current_password' => ['required', 'current_password'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ];
+        $validated = $request->validate([
+
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+
+            'profile_photo' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048',
+            ],
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ganti Password (opsional)
+        |--------------------------------------------------------------------------
+        */
+
+        if ($request->filled('password')) {
+
+            $request->validate([
+
+                'current_password' => [
+                    'required',
+                    'current_password',
+                ],
+
+                'password' => [
+                    'required',
+                    'confirmed',
+                    'min:8',
+                ],
+
+            ]);
+
+            $validated['password'] = Hash::make(
+                $request->password
+            );
+
         }
 
-        $validated = $request->validate($rules);
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Foto
+        |--------------------------------------------------------------------------
+        */
 
-        // Update basic info
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-
-        // Handle password update
-        if ($request->filled('current_password')) {
-            $user->password = Hash::make($validated['password']);
-        }
-
-        // Handle profile photo
         if ($request->hasFile('profile_photo')) {
-            // Delete old photo if exists
             if ($user->profile_photo) {
-                Storage::delete($user->profile_photo);
+                Storage::disk('public')
+                    ->delete($user->profile_photo);
             }
 
-            // Store new photo
-            $path = $request->file('profile_photo')->store('profile-photos', 'public');
-            $user->profile_photo = $path;
+            $validated['profile_photo'] =
+
+                $request
+                    ->file('profile_photo')
+                    ->store('profile-photos','public');
         }
 
-        $user->save();
+        unset($validated['current_password']);
 
-        return redirect()->route('profile.edit')
-            ->with('success', 'Profil berhasil diperbarui!');
+        $user->update($validated);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Profil berhasil diperbarui.',
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'photo' => $user->profile_photo
+                        ? asset('storage/'.$user->profile_photo)
+                        : asset('assets/img/default-profile.png'),
+                ]
+            ]);
+        }
+
+        return back()->with(
+            'success',
+            'Profil berhasil diperbarui.'
+        );
     }
 }

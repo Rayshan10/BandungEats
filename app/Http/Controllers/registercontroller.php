@@ -24,9 +24,15 @@ class RegisterController extends Controller
     {
         // Validasi data input
         $validator = Validator::make($request->all(), [
+
             'name' => 'required|string|max:255',
+
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Harus ada password_confirmation di form
+
+            'password' => 'required|string|min:8|confirmed',
+
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
         ]);
 
         if ($validator->fails()) {
@@ -35,12 +41,23 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
+        $profilePhoto = null;
+
+        if ($request->hasFile('profile_photo')) {
+
+            $profilePhoto = $request
+                ->file('profile_photo')
+                ->store('profile-photos', 'public');
+
+        }
+
         // Membuat pengguna baru
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', // Setiap pengguna baru akan memiliki role 'user'
+            'role' => 'user',
+            'profile_photo' => $profilePhoto,
         ]);
 
         // Redirect ke halaman login atau dashboard setelah register

@@ -2,56 +2,91 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Models\Resep;
 
 class ResepSeeder extends Seeder
 {
 
-    public function run(): void
+    private array $statistik = [
+        'Pedas' => 0,
+        'Gurih' => 0,
+        'Manis' => 0,
+        'Jajanan' => 0,
+        'Minuman' => 0,
+        'Kuah' => 0,
+        'Tumis' => 0,
+    ];
+
+    private array $quota = [
+        'Pedas' => 70,
+        'Gurih' => 120,
+        'Manis' => 70,
+        'Jajanan' => 70,
+        'Minuman' => 60,
+        'Kuah' => 60,
+        'Tumis' => 50,
+    ];
+
+    private function loadDataset(): array
     {
         $file = database_path('dataset/Indonesian_Food_Recipes.csv');
 
         if (!file_exists($file)) {
-            $this->command->error('Dataset tidak ditemukan.');
-            return;
+            throw new \Exception("Dataset tidak ditemukan.");
         }
 
         $handle = fopen($file, 'r');
 
-        // Lewati header
+        if ($handle === false) {
+            throw new \Exception("Gagal membuka dataset.");
+        }
+
         fgetcsv($handle);
 
         $recipes = [];
 
         while (($row = fgetcsv($handle, 0, ",")) !== false) {
-
             $recipes[] = $row;
-
         }
 
         fclose($handle);
 
-        shuffle($recipes);
+        return $recipes;
+    }
 
-        $statistik = [
-            'Pedas' => 0,
-            'Gurih' => 0,
-            'Manis' => 0,
-            'Jajanan' => 0,
-            'Minuman' => 0,
-            'Kuah' => 0,
-            'Tumis' => 0,
+    private function buildRecipeData(array $row, string $kategori): array
+    {
+        return [
+            'kategori' => $kategori,
+            'judul' => $row[0],
+            'gambar' => $this->getGambar($kategori),
+            'deskripsi' => $this->getDeskripsi($row[0], $kategori),
+            'link' => $row[4],
+            'waktu' => $this->getWaktu((int) $row[9]),
+            'kesulitan' => $this->getKesulitan((int) $row[9]),
+            'porsi' => !empty($row[7]) ? $row[7] . ' Porsi' : '2 Porsi',
+            'bahan' => str_replace('--', PHP_EOL, $row[1]),
+            'langkah' => $row[2],
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
+    }
 
-        $count = 0;
+    private function classifyRecipes(array $recipes): array
+    {
+        $grouped = [];
+
+        foreach ($this->quota as $kategori => $limit) {
+            $grouped[$kategori] = [];
+        }
 
         foreach ($recipes as $row) {
 
-            if ($count >= 500) {
-
-                break;
-
+            // Pastikan baris CSV memiliki minimal 10 kolom
+            if (count($row) < 10) {
+                continue;
             }
 
             $kategori = $this->getKategori(
@@ -60,62 +95,68 @@ class ResepSeeder extends Seeder
                 $row[5]
             );
 
-            $statistik[$kategori]++;
-
-            Resep::create([
-
-                'kategori' => $kategori,
-
-                'judul' => $row[0],
-
-                'gambar' => $this->getGambar($kategori),
-
-                'deskripsi' => $this->getDeskripsi(
-                    $row[0],
-                    $kategori
-                ),
-
-                'link' => $row[4],
-
-                'waktu' => $this->getWaktu(
-                    (int)$row[9]
-                ),
-
-                'kesulitan' => $this->getKesulitan(
-                    (int)$row[9]
-                ),
-
-                'porsi' => !empty($row[7])
-                    ? $row[7].' Porsi'
-                    : '2 Porsi',
-
-                'bahan' => str_replace(
-                    '--',
-                    PHP_EOL,
-                    $row[1]
-                ),
-
-                'langkah' => $row[2],
-
-            ]);
-
-            $count++;
-
+            $grouped[$kategori][] = $this->buildRecipeData($row, $kategori);
         }
 
+        return $grouped;
+    }
+
+    private function saveBalancedRecipes(array $grouped): void
+    {
+        DB::transaction(function () use ($grouped) {
+
+            foreach ($this->quota as $kategori => $limit) {
+
+                shuffle($grouped[$kategori]);
+
+                $selected = array_slice(
+                    $grouped[$kategori],
+                    0,
+                    min($limit, count($grouped[$kategori]))
+                );
+
+                Resep::insert($selected);
+
+                $this->statistik[$kategori] = count($selected);
+            }
+
+        });
+    }
+
+    private function showStatistics(): void
+    {
         $this->command->newLine();
 
-        $this->command->info('========== HASIL IMPORT ==========');
+        $this->command->info("========== HASIL IMPORT ==========");
 
-        foreach ($statistik as $kategori => $jumlah) {
-            $this->command->info("{$kategori} : {$jumlah}");
+        $total = 0;
+
+        foreach ($this->statistik as $kategori => $jumlah) {
+            $this->command->line(
+                str_pad($kategori, 10) . " : " . $jumlah
+            );
+
+            $total += $jumlah;
         }
 
-        $this->command->info('--------------------------------');
+        $this->command->info("--------------------------------");
 
-        $this->command->info('Total Resep : '.$count);
+        $this->command->info("Total Resep : {$total}");
 
-        $this->command->info('===============================');
+        $this->command->info("===============================");
+    }
+
+    public function run(): void
+    {
+        $recipes = $this->loadDataset();
+
+        shuffle($recipes);
+
+        $grouped = $this->classifyRecipes($recipes);
+
+        $this->saveBalancedRecipes($grouped);
+
+        $this->showStatistics();
     }
 
     private function getKategori(
@@ -142,7 +183,7 @@ class ResepSeeder extends Seeder
                 continue;
             }
 
-            foreach ($rules['override'] as $keyword) {
+            foreach ($rules['override'] ?? [] as $keyword) {
 
                 if (str_contains($judul, strtolower($keyword))) {
 
@@ -153,12 +194,6 @@ class ResepSeeder extends Seeder
             }
 
         }
-
-/*
-|--------------------------------------------------------------------------
-| SCORING ENGINE
-|--------------------------------------------------------------------------
-*/
 
         /*
         |--------------------------------------------------------------------------
@@ -173,21 +208,21 @@ class ResepSeeder extends Seeder
             $score[$namaKategori] = 0;
 
             // Judul
-            foreach ($rules['judul'] as $keyword) {
+            foreach ($rules['judul'] ?? [] as $keyword) {
                 if (str_contains($judul, strtolower($keyword))) {
                     $score[$namaKategori] += 5;
                 }
             }
 
             // Bahan
-            foreach ($rules['bahan'] as $keyword) {
+            foreach ($rules['bahan'] ?? [] as $keyword) {
                 if (str_contains($ingredients, strtolower($keyword))) {
                     $score[$namaKategori] += 2;
                 }
             }
 
             // Category CSV
-            foreach ($rules['category'] as $keyword) {
+            foreach ($rules['category'] ?? [] as $keyword) {
                 if (str_contains($category, strtolower($keyword))) {
                     $score[$namaKategori] += 3;
                 }

@@ -17,7 +17,7 @@
             <div class="col-lg-3 col-md-6">
                 <div class="recipe-card">
                     <img
-                        src="{{ asset('storage/'.$resep->gambar) }}"
+                        src="{{ asset('assets/img/'.$resep->gambar) }}"
                         alt="{{ $resep->judul }}"
                         class="recipe-image">
                     <div class="recipe-body">

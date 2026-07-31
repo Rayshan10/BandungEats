@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Tambahkan di sini, hapus deklarasi duplikat       
         'profile_photo', // Tambahkan di sini, hapus deklarasi duplikat
     ];
 

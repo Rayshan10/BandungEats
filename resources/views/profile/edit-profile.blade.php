@@ -5,7 +5,9 @@
 <div class="container py-4">
     <form method="POST"
         action="{{ route('profile.update') }}"
-        enctype="multipart/form-data">
+        enctype="multipart/form-data"
+        id="profileForm"
+        autocomplete="off">
         @csrf
         @method('PUT')
 
@@ -31,10 +33,12 @@
                             src="{{ asset('assets/img/default-profile.png') }}"
                             class="user-detail-photo">
                         @endif
-                        <h3 class="fw-bold mt-4">
+                        <h3 id="profileName"
+                            class="fw-bold mt-4">
                             {{ auth()->user()->name }}
                         </h3>
-                        <p class="text-muted">
+                        <p id="profileEmail"
+                            class="text-muted">
                             {{ auth()->user()->email }}
                         </p>
 
@@ -138,8 +142,14 @@
                                     type="password"
                                     id="current_password"
                                     name="current_password"
+                                    autocomplete="new-password"
                                     class="form-control form-control-lg">
                             </div>
+                            @error('current_password')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <!-- Password Baru -->
@@ -155,8 +165,14 @@
                                     type="password"
                                     id="password"
                                     name="password"
+                                    autocomplete="new-password"
                                     class="form-control form-control-lg">
                             </div>
+                            @error('password')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <!-- Konfirmasi Password -->
@@ -172,12 +188,19 @@
                                     type="password"
                                     id="password_confirmation"
                                     name="password_confirmation"
+                                    autocomplete="new-password"
                                     class="form-control form-control-lg">
                             </div>
+                            @error('password_confirmation')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
 
                         <div class="d-flex justify-content-end mt-5">
                             <button
+                                id="saveProfileBtn"
                                 type="submit"
                                 class="btn btn-primary btn-lg rounded-pill px-5">
                                 <i class="bi bi-floppy-fill me-2"></i>
@@ -193,46 +216,122 @@
 
 @if(session('success'))
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
     Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: "{{ session('success') }}",
-        confirmButtonColor: '#0d6efd',
-        timer: 2000,
-        showConfirmButton: false
+        icon:'success',
+        title:'Berhasil',
+        text:'{{ session("success") }}',
+        timer:1800,
+        showConfirmButton:false
     });
-
-});
 </script>
 @endif
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("profile_photo");
-    const preview = document.getElementById("preview-image");
-    const button = document.getElementById("change-photo-btn");
+    const input = document.getElementById('profile_photo');
+    const preview = document.getElementById('preview-image');
+    const button = document.getElementById('change-photo-btn');
 
-    // tombol ganti foto
-    button.addEventListener("click", function () {
+    button.addEventListener('click', () => {
         input.click();
     });
 
-    // klik foto juga bisa ganti
-    preview.addEventListener("click", function () {
-        input.click();
-    });
-
-    // preview foto
-    input.addEventListener("change", function () {
-        const file = this.files[0];
-
-        if(file){
-            preview.src = URL.createObjectURL(file);
+    input.addEventListener('change', function(){
+        if(this.files.length){
+            preview.src = URL.createObjectURL(this.files[0]);
         }
     });
-});
+
+    const profileForm = document.querySelector('form');
+    const saveBtn = document.getElementById('saveProfileBtn');
+
+    profileForm.addEventListener('submit', () => {
+        saveBtn.disabled = true;
+
+        saveBtn.innerHTML = `
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Menyimpan...
+        `;
+    });
+
+    document.querySelectorAll('.toggle-password').forEach(button=>{
+        button.addEventListener('click',function(){
+            const input = document.getElementById(
+                this.dataset.target
+            );
+
+            input.type =
+                input.type==='password'
+                ? 'text'
+                : 'password';
+        });
+    });
+</script>
+
+<script>
+    const form = document.getElementById('profileForm');
+    const saveBtn = document.getElementById('saveProfileBtn');
+
+    form.addEventListener('submit',function(e){
+
+        e.preventDefault();
+
+        saveBtn.disabled=true;
+
+        saveBtn.innerHTML=`
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Menyimpan...
+        `;
+
+        fetch(form.action,{
+            method:'POST',
+            headers:{
+                'X-CSRF-TOKEN':'{{ csrf_token() }}',
+                'X-Requested-With':'XMLHttpRequest'
+            },
+
+            body:new FormData(form)
+        })
+
+        .then(async response=>{
+            if(!response.ok){
+                throw await response.json();
+            }
+
+            return response.json();
+        })
+
+        .then(data=>{
+            Swal.fire({
+                icon:'success',
+                title:'Berhasil',
+                text:data.message,
+                timer:1800,
+                showConfirmButton:false
+            });
+
+            document.getElementById('profileName').innerText=data.user.name;
+            document.getElementById('profileEmail').innerText=data.user.email;
+            document.getElementById('preview-image').src=data.user.photo;
+            document.getElementById('navbarProfilePhoto').src=data.user.photo;
+        })
+
+        .catch(error=>{
+            Swal.fire({
+                icon:'error',
+                title:'Gagal',
+                text:'Periksa kembali data yang diinput.'
+            });
+        })
+
+        .finally(()=>{
+            saveBtn.disabled=false;
+            saveBtn.innerHTML=`
+                <i class="bi bi-floppy-fill me-2"></i>
+                Simpan Perubahan
+            `;
+        });
+
+    });
 </script>
 
 <style>

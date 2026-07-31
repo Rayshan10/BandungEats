@@ -4,7 +4,7 @@
         <div class="recipe-card h-100">
             <div class="recipe-image-wrapper">
                 <img
-                    src="{{ asset('storage/'.$item->gambar) }}"
+                    src="{{ asset('assets/img/'.$item->gambar) }}"
                     class="recipe-image"
                     alt="{{ $item->judul }}">
 
