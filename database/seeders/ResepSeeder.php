@@ -20,13 +20,13 @@ class ResepSeeder extends Seeder
     ];
 
     private array $quota = [
-        'Pedas' => 70,
-        'Gurih' => 120,
-        'Manis' => 70,
-        'Jajanan' => 70,
-        'Minuman' => 60,
-        'Kuah' => 60,
-        'Tumis' => 50,
+        'Pedas' => 15,
+        'Gurih' => 15,
+        'Manis' => 15,
+        'Jajanan' => 15,
+        'Minuman' => 15,
+        'Kuah' => 15,
+        'Tumis' => 15,
     ];
 
     private function loadDataset(): array
@@ -148,6 +148,14 @@ class ResepSeeder extends Seeder
 
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        DB::table('bookmarks')->truncate();
+
+        Resep::truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $recipes = $this->loadDataset();
 
         shuffle($recipes);

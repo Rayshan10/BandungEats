@@ -18,7 +18,7 @@
                 <!-- FOTO -->
                 <div class="col-lg-6">
                     <img
-                        src="{{ asset('assets/img/'.$resep->gambar) }}"
+                        src="{{ asset('storage/'.$resep->gambar) }}" class="img-fluid recipe-image w-100" alt="{{ $resep->judul }}"
                         class="img-fluid recipe-image w-100"
                         alt="{{ $resep->judul }}">
                 </div>
