@@ -81,10 +81,6 @@
     <div id="recipeContainer">
         @include('resep.partials.recipe-grid')
     </div>
-
-    <div class="mt-5">
-        {{ $resep->links() }}
-    </div>
 </div>
 
 <script>
