@@ -66,10 +66,11 @@
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" 
-                                                        class="btn btn-danger btn-sm" 
-                                                        onclick="return confirm('Yakin ingin menghapus resep ini?')">
-                                                    <i class="fas fa-trash"></i> Hapus
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-danger btn-sm btn-delete">
+                                                    <i class="fas fa-trash"></i>
+                                                    Hapus
                                                 </button>
                                             </form>
                                             @endif
@@ -106,4 +107,16 @@
         </div>
     @endif
 </div>
+
+<script>
+    document.querySelectorAll('.btn-delete').forEach(button=>{
+        button.addEventListener('click',function(){
+            const form=this.closest('form');
+
+            SwalDelete(function(){
+                form.submit();
+            });
+        });
+    });
+</script>
 @endsection

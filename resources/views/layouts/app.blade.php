@@ -40,6 +40,29 @@
         <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('assets/js/swal.js') }}"></script>
+
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                icon:'success',
+                title:'Berhasil',
+                text:'{{ session('success') }}',
+                timer:2200,
+                showConfirmButton:false
+            });
+        </script>
+        @endif
+
+        @if($errors->any())
+        <script>
+            Swal.fire({
+                icon:'error',
+                title:'Oops...',
+                html:`{!! implode('<br>',$errors->all()) !!}`
+            });
+        </script>
+        @endif
         @stack('scripts')
     </body>
 </html>

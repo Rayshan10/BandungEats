@@ -172,12 +172,22 @@ if (shareBtn) {
                     title: document.title,
                     url: window.location.href
                 });
-                alert('Link berhasil dibagikan!');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Link berhasil dibagikan!',
+                    timer: 1800,
+                    showConfirmButton: false
+                });
       } catch (err) {
           console.error('Error saat berbagi:', err);
       }
   } else {
-      alert('Fitur berbagi tidak didukung di browser ini.');
+      Swal.fire({
+          icon: 'warning',
+          title: 'Browser Tidak Mendukung',
+          text: 'Fitur berbagi tidak didukung di browser ini.'
+      });
   }
     });
 }
