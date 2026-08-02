@@ -125,9 +125,14 @@
             </div>
         </div>
     @else
-        <div class="alert alert-info">
-            Belum ada resep yang ditambahkan.
-        </div>
+
+    <x-empty-state
+        icon="bi-journal-plus"
+        title="Belum Ada Resep"
+        text="Tambahkan resep pertama untuk mulai mengelola data."
+        button="Tambah Resep"
+        :url="route('dashboard.resep.create')" />
+
     @endif
 </div>
 

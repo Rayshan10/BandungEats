@@ -25,64 +25,73 @@
     </div>
 </div>
 
-<div class="card inventory-table">
-    <div class="table-responsive">
-        <table class="table align-middle" id="userTable">
-            <thead>
-                <tr>
-                    <th>Foto</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Bookmark</th>
-                    <th>Bergabung</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td>
-                        <img src="{{ $user->profile_photo_url }}" class="user-thumb">
-                    </td>
-                    <td>
-                        <strong>
-                            {{ $user->name }}
-                        </strong>
-                    </td>
-                    <td>
-                        {{ $user->email }}
-                    </td>
-                    <td>
-                        {{ $user->bookmarks_count }}
-                    </td>
-                    <td>
-                        {{ $user->created_at->format('d M Y') }}
-                    </td>
-                    <td>
-                        @if($user->status == 'active')
-                        <span class="badge bg-success">Aktif</span>
-                        @else
-                        <span class="badge bg-danger">Nonaktif</span>
-                        @endif
-                    </td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('dashboard.user.show', $user->id) }}" class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-eye"></i>
-                            </a>
-                            <button class="btn btn-outline-danger btn-sm">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+@if($users->count())
+    <div class="card inventory-table">
+        <div class="table-responsive">
+            <table class="table align-middle" id="userTable">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Bookmark</th>
+                        <th>Bergabung</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach($users as $user)
+                    <tr>
+                        <td>
+                            <img src="{{ $user->profile_photo_url }}" class="user-thumb">
+                        </td>
+                        <td>
+                            <strong>
+                                {{ $user->name }}
+                            </strong>
+                        </td>
+                        <td>
+                            {{ $user->email }}
+                        </td>
+                        <td>
+                            {{ $user->bookmarks_count }}
+                        </td>
+                        <td>
+                            {{ $user->created_at->format('d M Y') }}
+                        </td>
+                        <td>
+                            @if($user->status == 'active')
+                            <span class="badge bg-success">Aktif</span>
+                            @else
+                            <span class="badge bg-danger">Nonaktif</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('dashboard.user.show', $user->id) }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <button class="btn btn-outline-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+@else
+    <x-empty-state
+        icon="bi-people"
+        title="Belum Ada User"
+        text="Belum ada pengguna yang terdaftar."
+        button="Dashboard"
+        :url="route('dashboard')" />
+@endif
 
 @push('scripts')
 

@@ -72,8 +72,12 @@
         @endforeach
     </div>
 @else
-    <div class="alert alert-info">
-        Belum ada resep yang ditambahkan ke favorit.
-        <a href="/home#resep" class="alert-link">Jelajahi resep</a>
-    </div>
+
+<x-empty-state
+    icon="bi-bookmark-heart"
+    title="Belum Ada Bookmark"
+    text="Simpan resep favoritmu agar lebih mudah ditemukan kembali."
+    button="Jelajahi Resep"
+    :url="route('recipes.index')" />
+
 @endif
