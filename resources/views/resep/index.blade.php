@@ -102,16 +102,32 @@ function loadRecipes(){
     }
 
     document.getElementById('recipeContainer').innerHTML = `
-        <div class="text-center py-5">
+    <div class="row g-4">
+    ${Array.from({length:6}).map(()=>`
+    <div class="col-lg-4 col-md-6">
+        <div class="recipe-card">
+            <div class="recipe-image-wrapper">
+                <div class="skeleton skeleton-image"></div>
+            </div>
 
-            <div class="spinner-border text-primary"></div>
+            <div class="recipe-body">
+                <div class="skeleton skeleton-title"></div>
 
-            <p class="mt-3 text-muted">
-                Memuat resep...
-            </p>
+                <div class="d-flex justify-content-between mb-3">
+                    <div class="skeleton" style="width:80px;height:14px;"></div>
+                    <div class="skeleton" style="width:80px;height:14px;"></div>
+                </div>
 
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text short"></div>
+                <div class="skeleton skeleton-button"></div>
+            </div>
         </div>
-        `;
+    </div>
+    `).join('')}
+    </div>
+    `;
 
     fetch("{{ route('recipes.index') }}?" + params.toString(),{
         headers:{
@@ -121,11 +137,30 @@ function loadRecipes(){
 
     .then(response=>response.text())
     .then(html=>{
+        setTimeout(() => {
+            const container = document.getElementById('recipeContainer');
 
-        document.getElementById('recipeContainer').innerHTML = html;
+            container.style.opacity = 0;
+            container.innerHTML = html;
 
-        // Update URL tanpa reload
-        history.replaceState({}, '', "{{ route('recipes.index') }}?" + params.toString());
+            container.animate(
+                [
+                    { opacity: 0 },
+                    { opacity: 1 }
+                ],
+                {
+                    duration: 250,
+                    fill: 'forwards'
+                }
+            );
+
+            history.replaceState(
+                {},
+                '',
+                "{{ route('recipes.index') }}?" + params.toString()
+            );
+
+        }, 250); // 250ms agar shimmer sempat terlihat
     });
 }
 
@@ -262,6 +297,65 @@ window.addEventListener('popstate', function () {
     .btn-detail:hover{
         background:#1565c0;
         color:white;
+    }
+
+    /* ===================================
+    Skeleton Loading (Shimmer Effect)
+    =================================== */
+    .skeleton{
+        position: relative;
+        overflow: hidden;
+        background: #e9ecef;
+        border-radius: 12px;
+    }
+
+    .skeleton::before{
+        content:"";
+        position:absolute;
+        top:0;
+        left:-150px;
+        width:150px;
+        height:100%;
+        background:linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.7),
+            transparent
+        );
+
+        animation: shimmer 1.2s infinite;
+    }
+
+    @keyframes shimmer{
+        100%{
+            transform:translateX(600px);
+        }
+    }
+
+    .skeleton-image{
+        width:100%;
+        height:220px;
+    }
+
+    .skeleton-title{
+        height:24px;
+        margin-bottom:18px;
+    }
+
+    .skeleton-text{
+        height:14px;
+        margin-bottom:12px;
+    }
+
+    .skeleton-text.short{
+        width:70%;
+    }
+
+    .skeleton-button{
+        width:45%;
+        height:42px;
+        border-radius:50px;
+        margin-top:25px;
     }
 </style>
 
