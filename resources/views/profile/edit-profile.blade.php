@@ -214,18 +214,6 @@
     </form>
 </div>
 
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon:'success',
-        title:'Berhasil',
-        text:'{{ session("success") }}',
-        timer:1800,
-        showConfirmButton:false
-    });
-</script>
-@endif
-
 <script>
     const input = document.getElementById('profile_photo');
     const preview = document.getElementById('preview-image');

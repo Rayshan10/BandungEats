@@ -30,6 +30,57 @@
         <script src="{{ asset('assets/js/admin.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('assets/js/swal.js') }}"></script>
+
+        @if(session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastSuccess(@json(session('success')));
+            });
+        </script>
+        @endif
+
+        @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastError(@json(session('error')));
+            });
+            ToastError("{{ session('error') }}");
+        </script>
+        @endif
+
+        @if(session('warning'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastWarning(@json(session('warning')));
+            });
+            ToastWarning("{{ session('warning') }}");
+        </script>
+        @endif
+
+        @if(session('info'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastInfo(@json(session('info')));
+            });
+            ToastInfo("{{ session('info') }}");
+        </script>
+        @endif
+
+        @if($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#dc3545'
+                });
+
+            });
+        </script>
+        @endif
 
         @stack('scripts')
     

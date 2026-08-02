@@ -44,25 +44,53 @@
 
         @if(session('success'))
         <script>
-            Swal.fire({
-                icon:'success',
-                title:'Berhasil',
-                text:'{{ session('success') }}',
-                timer:2200,
-                showConfirmButton:false
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastSuccess(@json(session('success')));
             });
+        </script>
+        @endif
+
+        @if(session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastError(@json(session('error')));
+            });
+        </script>
+        @endif
+
+        @if(session('warning'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastWarning(@json(session('warning')));
+            });
+            ToastWarning("{{ session('warning') }}");
+        </script>
+        @endif
+
+        @if(session('info'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                ToastInfo(@json(session('info')));
+            });
+            ToastInfo("{{ session('info') }}");
         </script>
         @endif
 
         @if($errors->any())
         <script>
-            Swal.fire({
-                icon:'error',
-                title:'Oops...',
-                html:`{!! implode('<br>',$errors->all()) !!}`
+            document.addEventListener('DOMContentLoaded', function () {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#dc3545'
+                });
+
             });
         </script>
         @endif
+
         @stack('scripts')
     </body>
 </html>

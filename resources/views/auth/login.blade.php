@@ -13,20 +13,6 @@
     Masuk untuk menikmati berbagai resep khas Kota Bandung.
 </p>
 
-@if(session('success'))
-
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-
-@endif
-
-@if($errors->any())
-<div class="alert alert-danger">
-    {{ $errors->first() }}
-</div>
-@endif
-
 <form action="{{ route('login.auth') }}" method="POST">
     @csrf
     <div class="modern-input input-group">
