@@ -32,13 +32,14 @@
 
     <body>
         @include('partials.navbar')
-            <main>
+            <main id="page-content">
                 @yield('content')
             </main>
         @include('partials.footer')
         
         <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/js/ripple.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="{{ asset('assets/js/swal.js') }}"></script>
 

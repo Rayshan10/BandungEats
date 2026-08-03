@@ -20,14 +20,15 @@
             @include('dashboard.layouts.sidebar')
             <div class="admin-main">
                 @include('dashboard.layouts.topbar')
-                <div class="admin-content">
+                <main id="page-content">
                     @yield('content')
-                </div>
+                </main>
             </div>
         </div>
 
         <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('assets/js/admin.js') }}"></script>
+        <script src="{{ asset('assets/js/ripple.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="{{ asset('assets/js/swal.js') }}"></script>
@@ -45,7 +46,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 ToastError(@json(session('error')));
             });
-            ToastError("{{ session('error') }}");
         </script>
         @endif
 
@@ -54,7 +54,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 ToastWarning(@json(session('warning')));
             });
-            ToastWarning("{{ session('warning') }}");
         </script>
         @endif
 
@@ -62,8 +61,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 ToastInfo(@json(session('info')));
-            });
-            ToastInfo("{{ session('info') }}");
+            })
         </script>
         @endif
 
@@ -77,7 +75,6 @@
                     html: `{!! implode('<br>', $errors->all()) !!}`,
                     confirmButtonColor: '#dc3545'
                 });
-
             });
         </script>
         @endif

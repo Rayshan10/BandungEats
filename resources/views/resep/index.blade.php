@@ -228,14 +228,15 @@ window.addEventListener('popstate', function () {
         background:#fff;
         border-radius:22px;
         overflow:hidden;
-        box-shadow:0 10px 30px rgba(0,0,0,.06);
-        transition:.35s;
+        box-shadow:0 10px 25px rgba(0,0,0,.06);
+        transition:all .35s ease;
         height:100%;
     }
 
     .recipe-card:hover{
         transform:translateY(-10px);
-        box-shadow:0 20px 45px rgba(0,0,0,.12);
+        box-shadow:
+        0 25px 45px rgba(0,0,0,.15);
     }
 
     .recipe-image-wrapper{
@@ -246,6 +247,7 @@ window.addEventListener('popstate', function () {
         width:100%;
         height:230px;
         object-fit:cover;
+        transition:transform .45s ease;
     }
 
     .recipe-category{
@@ -258,6 +260,7 @@ window.addEventListener('popstate', function () {
         border-radius:50px;
         font-size:13px;
         font-weight:600;
+        transition:all .35s ease;
     }
 
     .recipe-body{
@@ -275,6 +278,7 @@ window.addEventListener('popstate', function () {
         color:#777;
         font-size:14px;
         margin-bottom:18px;
+        transition:.3s;
     }
 
     .recipe-body p{
@@ -291,12 +295,26 @@ window.addEventListener('popstate', function () {
         text-decoration:none;
         padding:12px;
         border-radius:50px;
-        transition:.3s;
+        transition:all .3s ease;
     }
 
     .btn-detail:hover{
-        background:#1565c0;
+        background:#0d6efd;
         color:white;
+        transform:translateY(-2px);
+    }
+
+    .recipe-card:hover .recipe-image{
+        transform:scale(1.08);
+    }
+
+    .recipe-card:hover .recipe-category{
+        transform:translateY(-6px);
+        background:#1565c0;
+    }
+
+    .recipe-card:hover .recipe-meta{
+        color:#444;
     }
 
     /* ===================================

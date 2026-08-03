@@ -1236,9 +1236,78 @@ section,
     color: var(--accent-color);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-    /* Add your styles here */
+/* ===================================
+    Page Transition
+=================================== */
+
+#page-content{
+    animation:pageFade .45s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/*==================================================
+=            Material Ripple Effect                =
+==================================================*/
+
+.btn{
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn:active{
+    transform:scale(.97);
+}
+
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    transform:scale(0);
+    animation:ripple .6s linear;
+    background:rgba(255,255,255,.35);
+    pointer-events:none;
+}
+
+@keyframes ripple{
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+}
+
+/* ===================================
+    Page Transition
+=================================== */
+
+#page-content{
+    animation:pageFade .45s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }

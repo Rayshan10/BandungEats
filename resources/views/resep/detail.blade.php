@@ -181,6 +181,12 @@
 
         const form=e.target;
 
+        const button=form.querySelector('.bookmarkButton');
+
+        button.classList.add('loading');
+
+        button.disabled=true;
+
         fetch(form.action,{
             method:'POST',
 
@@ -192,14 +198,20 @@
             body:new FormData(form)
         })
 
-        .then(res=>res.json())
+        .then(res => {
+            if(!res.ok){
+                throw new Error("Server Error");
+            }
+
+            return res.json();
+        })
 
         .then(data=>{
-            const button=form.querySelector('.bookmarkButton');
 
             if(data.action==="added"){
                 button.classList.remove('btn-danger');
                 button.classList.add('btn-warning');
+                button.classList.add('animate')
 
                 button.innerHTML=
                 '<i class="bi bi-bookmark-check-fill me-2"></i>Hapus Bookmark';
@@ -213,18 +225,11 @@
                     );
                 }
 
-                Swal.fire({
-                    toast:true,
-                    position:'top-end',
-                    icon:'success',
-                    title:'Bookmark berhasil disimpan',
-                    showConfirmButton:false,
-                    timer:1800,
-                    timerProgressBar:true
-                });
+                ToastSuccess("Bookmark berhasil disimpan");
 
             }else{
                 button.classList.remove('btn-warning');
+                button.classList.add('animate');
                 button.classList.add('btn-danger');
 
                 button.innerHTML=
@@ -234,16 +239,22 @@
 
                 form.querySelector('input[name="_method"]')?.remove();
 
-                Swal.fire({
-                    toast:true,
-                    position:'top-end',
-                    icon:'info',
-                    title:'Bookmark dihapus',
-                    showConfirmButton:false,
-                    timer:1800,
-                    timerProgressBar:true
-                });
+                ToastInfo("Bookmark dihapus");
             }
+
+            button.classList.remove('loading');
+            button.disabled = false;
+
+            setTimeout(()=>{
+                button.classList.remove('animate');
+            },450);
+        });
+
+        .catch(error => {
+            button.classList.remove('loading');
+            button.disabled = false;
+            ToastError("Terjadi kesalahan. Silakan coba lagi.");
+            console.error(error);
         });
     });
 </script>
@@ -268,6 +279,50 @@
 
 .card:hover{
     transform:translateY(-3px);
+}
+
+/* ==========================================
+    Bookmark Animation
+========================================== */
+
+.bookmarkButton{
+    transition:all .3s ease;
+}
+
+.bookmarkButton i{
+    display:inline-block;
+    transition:transform .25s ease;
+}
+
+.bookmarkButton.animate i{
+    animation:bounceBookmark .45s ease;
+}
+
+@keyframes bounceBookmark{
+    0%{
+        transform:scale(1);
+    }
+
+    30%{
+        transform:scale(1.45);
+    }
+
+    55%{
+        transform:scale(.9);
+    }
+
+    75%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+.bookmarkButton.loading{
+    opacity:.75;
+    pointer-events:none;
 }
 </style>
 @endsection

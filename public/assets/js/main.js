@@ -193,3 +193,46 @@ if (shareBtn) {
 }
 
 })();
+
+/*
+|--------------------------------------------------------------------------
+| Ripple Effect
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener("click", function(e){
+
+    const button = e.target.closest(".btn");
+
+    if(!button) return;
+
+    const circle = document.createElement("span");
+
+    const diameter = Math.max(
+        button.clientWidth,
+        button.clientHeight
+    );
+
+    circle.style.width = circle.style.height = diameter + "px";
+
+    const rect = button.getBoundingClientRect();
+
+    circle.style.left =
+        e.clientX - rect.left - diameter/2 + "px";
+
+    circle.style.top =
+        e.clientY - rect.top - diameter/2 + "px";
+
+    circle.classList.add("ripple");
+
+    const oldRipple = button.querySelector(".ripple");
+
+    if(oldRipple){
+
+        oldRipple.remove();
+
+    }
+
+    button.appendChild(circle);
+
+});
