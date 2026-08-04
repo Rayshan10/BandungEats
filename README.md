@@ -1,66 +1,304 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍽️ BandungEats
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+BandungEats adalah aplikasi web berbasis **Laravel 12** yang menyediakan informasi resep makanan khas Bandung. Aplikasi ini memungkinkan pengguna untuk mencari resep, melihat detail resep, menyimpan resep favorit (bookmark), serta mengelola profil pengguna. Selain itu, aplikasi juga dilengkapi dengan dashboard admin untuk mengelola seluruh data resep dan pengguna.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur Utama
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 👥 User
+- Registrasi akun
+- Login & Logout
+- Edit profil
+- Upload foto profil
+- Ganti password
+- Melihat daftar resep
+- Pencarian resep secara real-time
+- Filter resep berdasarkan kategori
+- Detail resep
+- Bookmark resep favorit
+- Melihat daftar bookmark
+- Responsive Design
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+### 👨‍💼 Admin
+- Dashboard Admin
+- Kelola Resep (CRUD)
+- Kelola User
+- Statistik Dashboard
+- Grafik jumlah resep per kategori
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🍲 Kategori Resep
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- 🌶️ Pedas
+- 🍛 Gurih
+- 🍰 Manis
+- 🥟 Jajanan
+- 🥣 Kuah
+- 🥤 Minuman
+- 🥘 Tumis
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Teknologi yang Digunakan
 
-### Premium Partners
+### Backend
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- Laravel 12
+- PHP 8.2+
+- MySQL
 
-## Contributing
+### Frontend
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Blade Template
+- Bootstrap 5
+- JavaScript
+- AJAX (Fetch API)
+- Chart.js
+- SweetAlert2
 
-## Code of Conduct
+### Tools
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Composer
+- Git
+- GitHub
+- Laragon
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📂 Struktur Project
 
-## License
+```
+bandungeats
+│
+├── app
+├── bootstrap
+├── config
+├── database
+│   ├── migrations
+│   ├── seeders
+│   └── dataset
+│
+├── public
+│
+├── resources
+│   ├── views
+│   ├── css
+│   └── js
+│
+├── routes
+├── storage
+└── README.md
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🚀 Cara Menjalankan Project
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/USERNAME/BandungEats.git
+```
+
+Masuk ke folder project
+
+```bash
+cd BandungEats
+```
+
+---
+
+### 2. Install Dependency
+
+```bash
+composer install
+```
+
+---
+
+### 3. Copy Environment
+
+```bash
+cp .env.example .env
+```
+
+---
+
+### 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+---
+
+### 5. Atur Database
+
+Edit file
+
+```
+.env
+```
+
+Contoh
+
+```env
+DB_DATABASE=bandungeats
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+### 6. Jalankan Migration
+
+```bash
+php artisan migrate
+```
+
+atau
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+### 7. Storage Link
+
+```bash
+php artisan storage:link
+```
+
+---
+
+### 8. Jalankan Server
+
+```bash
+php artisan serve
+```
+
+Buka
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 👤 Default Admin
+
+Admin dapat dibuat menggunakan Laravel Tinker.
+
+```bash
+php artisan tinker
+```
+
+```php
+\App\Models\User::create([
+    'name'=>'Administrator',
+    'email'=>'admin@gmail.com',
+    'password'=>bcrypt('password'),
+    'role'=>'admin'
+]);
+```
+
+Login
+
+```
+Email    : admin@gmail.com
+Password : admin123
+```
+
+---
+
+## 📊 Dataset
+
+Dataset resep berasal dari kumpulan resep makanan Indonesia yang kemudian diproses menggunakan **Smart Seeder**.
+
+Fitur Smart Seeder:
+
+- Klasifikasi resep otomatis
+- Penentuan kategori menggunakan keyword scoring
+- Pembagian dataset seimbang
+- Pembuatan deskripsi otomatis
+- Estimasi waktu memasak
+- Estimasi tingkat kesulitan
+- Randomisasi data
+
+---
+
+## 📷 Screenshot
+
+### Halaman Home
+
+> Tambahkan screenshot Home
+
+### Halaman Resep
+
+> Tambahkan screenshot Resep
+
+### Detail Resep
+
+> Tambahkan screenshot Detail Resep
+
+### Bookmark
+
+> Tambahkan screenshot Bookmark
+
+### Dashboard Admin
+
+> Tambahkan screenshot Dashboard
+
+---
+
+## 📈 Fitur yang Diimplementasikan
+
+- Authentication
+- Authorization
+- CRUD Resep
+- CRUD User
+- Profile Management
+- Upload Image
+- Bookmark System
+- Search
+- Filter
+- Pagination
+- Responsive UI
+- Chart Dashboard
+- SweetAlert Notification
+- Loading Animation
+- Empty State
+- Counter Animation
+- Page Transition
+
+---
+
+## 📌 Future Improvements
+
+- Sistem Rekomendasi Resep (SAW)
+- Rating Resep
+- Komentar Pengguna
+- Riwayat Aktivitas
+- Export Data
+- Dashboard Analytics yang lebih lengkap
+
+---
+
+## 👨‍💻 Developer
+
+**Rayshan Gani Putra**
+
+Universitas Logistik dan Bisnis Internasional
+
+Program Studi Teknik Informatika
+
+---
+
+## 📄 License
+
+Project ini dibuat untuk keperluan akademik sebagai Tugas Akhir.
