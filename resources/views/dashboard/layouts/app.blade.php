@@ -20,7 +20,7 @@
             @include('dashboard.layouts.sidebar')
             <div class="admin-main">
                 @include('dashboard.layouts.topbar')
-                <main id="page-content">
+                <main id="page-content" class="admin-content">
                     @yield('content')
                 </main>
             </div>

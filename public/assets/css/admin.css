@@ -85,7 +85,10 @@ body{
 }
 
 .chart-card{
-    height:420px;
+    border: none;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    padding: 10px;
 }
 
 .chart-card canvas{

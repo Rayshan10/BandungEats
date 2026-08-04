@@ -96,7 +96,7 @@
                     Jumlah Resep per Kategori
                 </h5>
 
-                <canvas id="kategoriChart"></canvas>
+                <canvas id="kategoriChart" height="350"></canvas>
             </div>
         </div>
     </div>
@@ -140,15 +140,15 @@ new Chart(ctx, {
     },
 
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
 
-        animation: {
-            duration: 1800,
-            easing: 'easeOutQuart'
-        },
+        responsive: true,
+
+        maintainAspectRatio: true,
+
+        aspectRatio: 2.4,
 
         plugins: {
+
             legend: {
                 display: false
             },
@@ -156,41 +156,11 @@ new Chart(ctx, {
             tooltip: {
                 backgroundColor: '#252525',
                 titleColor: '#fff',
-                bodyColor: '#fff',
-                padding: 12,
-                cornerRadius: 10,
-                displayColors: false
+                bodyColor: '#fff'
             }
-        },
 
-        scales: {
-            x: {
-                grid: {
-                    display: false
-                },
-
-                ticks: {
-                    color: '#555',
-                    font: {
-                        size: 13,
-                        weight: '600'
-                    }
-                }
-            },
-
-            y: {
-                beginAtZero: true,
-
-                ticks: {
-                    stepSize: 1,
-                    color: '#777'
-                },
-
-                grid: {
-                    color: 'rgba(0,0,0,0.06)'
-                }
-            }
         }
+
     }
 });
 
