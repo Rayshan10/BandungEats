@@ -2,7 +2,7 @@
         
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             
-        <a href="/home" class="logo d-flex align-items-center">
+        <a href="/" class="logo d-flex align-items-center">
             <!-- Uncomment the line below if you also wish to use an image logo -->
             <!-- <img src="assets/img/logo.png" alt=""> -->
             <h1 class="sitename"><span>Bandung</span>Eats</h1>
