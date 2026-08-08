@@ -152,10 +152,10 @@ POPULAR
     margin-bottom: 18px;
 }
 
-.recipe-title {
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 8px;
+.recipe-title{
+    min-height:80px;
+    font-weight:700;
+    line-height:1.3;
 }
 
 .recipe-info {

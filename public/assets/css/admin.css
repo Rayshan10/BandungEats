@@ -18,6 +18,9 @@ body{
     width:260px;
     background:#0F172A;
     color:white;
+    position:sticky;
+    top:0;
+    height:100vh;
 }
 
 .sidebar-logo{

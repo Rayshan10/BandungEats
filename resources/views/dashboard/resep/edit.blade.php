@@ -78,6 +78,12 @@
                                     <option value="Jajanan"{{ old('category',$resep->kategori)=='Jajanan' ? 'selected':'' }}>
                                         Jajanan
                                     </option>
+                                    <option value="Kuah"{{ old('category',$resep->kategori)=='Kuah' ? 'selected':'' }}>
+                                        Kuah
+                                    </option>
+                                    <option value="Tumis"{{ old('category',$resep->kategori)=='Tumis' ? 'selected':'' }}>
+                                        Tumis
+                                    </option>
                                     <option value="Minuman"{{ old('category',$resep->kategori)=='Minuman' ? 'selected':'' }}>
                                         Minuman
                                     </option>

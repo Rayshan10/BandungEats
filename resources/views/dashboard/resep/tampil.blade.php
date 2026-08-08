@@ -32,6 +32,8 @@
         <option value="Gurih">Gurih</option>
         <option value="Manis">Manis</option>
         <option value="Jajanan">Jajanan</option>
+        <option value="Kuah">Kuah</option>
+        <option value="Tumis">Tumis</option>
         <option value="Minuman">Minuman</option>
     </select>
 </div>

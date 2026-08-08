@@ -84,143 +84,220 @@
 </div>
 
 <script>
+    const searchInput = document.getElementById('searchInput');
+    const recipeContainer = document.getElementById('recipeContainer');
 
-const searchInput = document.getElementById('searchInput');
-let currentKategori = "{{ request('kategori') }}";
-let typingTimer;
+    let currentKategori = "{{ request('kategori') }}";
+    let typingTimer;
 
-function loadRecipes(){
-    const keyword = searchInput.value;
-    const params = new URLSearchParams();
+    /*
+    |--------------------------------------------------------------------------
+    | Skeleton Loader
+    |--------------------------------------------------------------------------
+    */
 
-    if(keyword){
-        params.append('search', keyword);
-    }
+    function showSkeleton() {
 
-    if(currentKategori){
-        params.append('kategori', currentKategori);
-    }
+        recipeContainer.innerHTML = `
+        <div class="row g-4">
+            ${Array.from({ length: 6 }).map(() => `
+                <div class="col-lg-4 col-md-6">
+                    <div class="recipe-card">
+                        <div class="recipe-image-wrapper">
+                            <div class="skeleton skeleton-image"></div>
+                        </div>
 
-    document.getElementById('recipeContainer').innerHTML = `
-    <div class="row g-4">
-    ${Array.from({length:6}).map(()=>`
-    <div class="col-lg-4 col-md-6">
-        <div class="recipe-card">
-            <div class="recipe-image-wrapper">
-                <div class="skeleton skeleton-image"></div>
-            </div>
+                        <div class="recipe-body">
+                            <div class="skeleton skeleton-title"></div>
 
-            <div class="recipe-body">
-                <div class="skeleton skeleton-title"></div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div class="skeleton" style="width:80px;height:14px;"></div>
+                                <div class="skeleton" style="width:80px;height:14px;"></div>
+                            </div>
 
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="skeleton" style="width:80px;height:14px;"></div>
-                    <div class="skeleton" style="width:80px;height:14px;"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text short"></div>
+
+                            <div class="skeleton skeleton-button"></div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text short"></div>
-                <div class="skeleton skeleton-button"></div>
-            </div>
+            `).join('')}
         </div>
-    </div>
-    `).join('')}
-    </div>
-    `;
+        `;
 
-    fetch("{{ route('recipes.index') }}?" + params.toString(),{
-        headers:{
-            'X-Requested-With':'XMLHttpRequest'
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Load Recipes
+    |--------------------------------------------------------------------------
+    */
+
+    function loadRecipes(page = 1, pushHistory = true) {
+
+        const params = new URLSearchParams();
+
+        if (searchInput.value.trim() !== '') {
+            params.set('search', searchInput.value.trim());
         }
-    })
 
-    .then(response=>response.text())
-    .then(html=>{
-        setTimeout(() => {
-            const container = document.getElementById('recipeContainer');
+        if (currentKategori !== '') {
+            params.set('kategori', currentKategori);
+        }
 
-            container.style.opacity = 0;
-            container.innerHTML = html;
+        params.set('page', page);
 
-            container.animate(
-                [
-                    { opacity: 0 },
-                    { opacity: 1 }
-                ],
-                {
-                    duration: 250,
-                    fill: 'forwards'
+        const url = "{{ route('recipes.index') }}?" + params.toString();
+
+        showSkeleton();
+
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+
+        .then(res => res.text())
+
+        .then(html => {
+
+            setTimeout(() => {
+
+                recipeContainer.innerHTML = html;
+
+                recipeContainer.animate(
+                    [
+                        { opacity: 0 },
+                        { opacity: 1 }
+                    ],
+                    {
+                        duration: 250,
+                        fill: 'forwards'
+                    }
+                );
+
+                if (pushHistory) {
+                    history.replaceState({}, '', url);
                 }
-            );
 
-            history.replaceState(
-                {},
-                '',
-                "{{ route('recipes.index') }}?" + params.toString()
-            );
+            }, 250);
 
-        }, 250); // 250ms agar shimmer sempat terlihat
-    });
-}
-
-// SEARCH
-searchInput.addEventListener('keyup',function(){
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(loadRecipes,300);
-});
-
-// FILTER KATEGORI
-document.querySelectorAll('.category-btn').forEach(button=>{
-    button.addEventListener('click',function(e){
-        e.preventDefault();
-        currentKategori = this.dataset.kategori;
-
-        // warna tombol
-        document.querySelectorAll('.category-btn').forEach(btn=>{
-            btn.classList.remove('btn-primary');
-            btn.classList.add('btn-light');
         });
 
-        this.classList.remove('btn-light');
-        this.classList.add('btn-primary');
-        loadRecipes();
-    });
-});
+    }
 
-window.addEventListener('popstate', function () {
+    /*
+    |--------------------------------------------------------------------------
+    | Search
+    |--------------------------------------------------------------------------
+    */
 
-    const params = new URLSearchParams(window.location.search);
+    searchInput.addEventListener('keyup', function () {
 
-    currentKategori = params.get('kategori') || '';
+        clearTimeout(typingTimer);
 
-    searchInput.value = params.get('search') || '';
+        typingTimer = setTimeout(() => {
 
-    document.querySelectorAll('.category-btn').forEach(btn => {
+            loadRecipes(1);
 
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-light');
-
-        if (btn.dataset.kategori === currentKategori) {
-
-            btn.classList.remove('btn-light');
-            btn.classList.add('btn-primary');
-
-        }
-
-        if (currentKategori === '' && btn.dataset.kategori === '') {
-
-            btn.classList.remove('btn-light');
-            btn.classList.add('btn-primary');
-
-        }
+        }, 300);
 
     });
 
-    loadRecipes();
+    /*
+    |--------------------------------------------------------------------------
+    | Filter Kategori
+    |--------------------------------------------------------------------------
+    */
 
-});
+    document.querySelectorAll('.category-btn').forEach(button => {
 
+        button.addEventListener('click', function (e) {
+
+            e.preventDefault();
+
+            currentKategori = this.dataset.kategori;
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-light');
+
+            });
+
+            this.classList.remove('btn-light');
+            this.classList.add('btn-primary');
+
+            loadRecipes(1);
+
+        });
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pagination AJAX
+    |--------------------------------------------------------------------------
+    */
+
+    document.addEventListener('click', function (e) {
+
+        const link = e.target.closest('.pagination a');
+
+        if (!link) return;
+
+        e.preventDefault();
+
+        const url = new URL(link.href);
+
+        const page = url.searchParams.get('page') || 1;
+
+        loadRecipes(page);
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Browser Back / Forward
+    |--------------------------------------------------------------------------
+    */
+
+    window.addEventListener('popstate', function () {
+
+        const params = new URLSearchParams(window.location.search);
+
+        currentKategori = params.get('kategori') || '';
+
+        searchInput.value = params.get('search') || '';
+
+        const page = params.get('page') || 1;
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-light');
+
+            if (btn.dataset.kategori === currentKategori) {
+
+                btn.classList.remove('btn-light');
+                btn.classList.add('btn-primary');
+
+            }
+
+            if (currentKategori === '' && btn.dataset.kategori === '') {
+
+                btn.classList.remove('btn-light');
+                btn.classList.add('btn-primary');
+
+            }
+
+        });
+
+        loadRecipes(page, false);
+
+    });
 </script>
 
 <style>
