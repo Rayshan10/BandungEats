@@ -11,11 +11,7 @@ use App\Http\Controllers\ResepController;
 use App\Http\Controllers\DashboardController;
 
 // Routes yang bisa diakses semua orang (tanpa login)
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', [ResepController::class, 'home'])->name('home');
+Route::get('/', [ResepController::class, 'home'])->name('home');
 
 Route::get('/resep', [ResepController::class, 'tampil'])->name('resep.tampil');
 Route::get('/kategori/{kategori}', [ResepController::class, 'kategori'])->name('resep.kategori');
